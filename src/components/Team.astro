@@ -1,0 +1,47 @@
+---
+import urlForImage from "@utils/urlForImage";
+import { PortableText } from "astro-portabletext";
+import { Image } from "astro:assets";
+
+const { heading, content, members } = Astro.props;
+---
+
+<section class="bg-[var(--color-2)] secondary">
+  <div
+    class="container grid grid-cols-1 gap-x-16 gap-y-16 px-6 lg:px-8 xl:grid-cols-3"
+  >
+    <div>
+      <h2 class="h2 font-display">{heading}</h2>
+
+      <PortableText value={content} />
+    </div>
+
+    <ul
+      role="list"
+      class="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none xl:col-span-2 list-none"
+    >
+      {
+        members.map(({ firstName, lastName, image, role, description }) => (
+          <li class="bg-[var(--color-3)] pl-0">
+            <Image
+              class="height-[400px] aspect-[3/2] w-full object-cover object-center"
+              src={urlForImage(image).width(400).height(400).quality(100).url()}
+              alt={`${firstName} ${lastName}`}
+              width="600"
+              height="400"
+            />
+            <div class="px-4 pb-4">
+              <h3 class="p1 mt-8 font-semibold">
+                {firstName} {lastName}
+              </h3>
+
+              <p class="mt-2">{role}</p>
+
+              <p>{description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

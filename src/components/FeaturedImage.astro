@@ -1,0 +1,41 @@
+---
+import urlForImage from "@utils/urlForImage";
+import { Image } from "astro:assets";
+
+const { alt } = Astro.props;
+---
+
+<section class="bg-[var(--color-2)] secondary">
+  <div class="container hidden lg:block">
+    <picture>
+      <source
+        media="(min-width: 1024px)"
+        srcset={urlForImage(Astro.props).height(500).format("webp").url()}
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 1024px)"
+        srcset={urlForImage(Astro.props).height(500).format("jpg").url()}
+        type="image/jpg"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset={urlForImage(Astro.props).height(400).format("webp").url()}
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset={urlForImage(Astro.props).height(400).format("jpg").url()}
+        type="image/jpg"
+      />
+      <img
+        class={Astro.props.class ??
+          "h-[300px] object-center object-cover w-full aspect-[3/2]"}
+        src={urlForImage(Astro.props).height(300).format("jpg").url()}
+        alt={alt}
+        height="300"
+        width="0"
+      />
+    </picture>
+  </div>
+</section>

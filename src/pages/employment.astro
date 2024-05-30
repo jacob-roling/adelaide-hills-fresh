@@ -1,0 +1,49 @@
+---
+import { sanityClient } from "sanity:client";
+import Base from "#layouts/Base.astro";
+import { SEO } from "astro-seo";
+import { PortableText } from "astro-portabletext";
+import urlForImage from "#utils/urlForImage";
+
+const page: any = await sanityClient.fetch(
+  `*[_id == "be399361-43d2-4225-ae1e-5ce4fde53ace"][0] {
+    ...
+}`);
+---
+
+<Base>
+  <SEO slot="head" title={page.title} description={page.description} />
+
+  <main id="main">
+    <section class="section pt-32 prose">
+      <div class="container grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="md:col-span-2 md:mt-8">
+          <h1>{page.hero.heading}</h1>
+          <PortableText value={page.hero.content} />
+          <ul class="mt-8 not-prose divide-y divide-6" role="list">
+            {page.sections[0].list.map(({title, description}) => <li class="flex items-center gap-4 py-4">
+              <div class="grow">
+                <div class="text-lg label">
+                  {title}
+                </div>
+                <p class="mt-2">
+                  {description}
+                </p>
+              </div>
+              <div>
+                <button class="button primary underline">Apply Now</button>
+              </div>
+            </li>)}
+          </ul>
+        </div>
+        <div>
+          <img
+            class="w-full h-[300px] md:h-[400px] lg:h-[500px] object-center object-cover !mt-0"
+            src={urlForImage(page.hero.image).url()}
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

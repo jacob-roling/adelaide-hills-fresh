@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+---
+
+<footer class="bg-neutral-background-subtle container typography border-t pt-8">  
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 [&_.button]:justify-start">
+    <div class="col-span-2 lg:col-span-1">
+      <Image
+        class="h-[100px] w-auto mb-4"
+        src="/logo.png"
+        alt="Adelaide Hills Fresh Logo"
+        width="128"
+        height="128"
+      />
+      <p>
+        ABN: 123456789
+      </p>
+    </div>
+    
+    <div class="col-span-3">
+
+    </div>
+
+    <div>
+      <ul class="m-0">
+        <li><a href="/about-us"><span>About Us</span></a></li>
+        <li><a href="/our-apples"><span>Our Apples</span></a></li>
+        <li>
+          <a href="/fruit-australia"><span>Fruit Australia</span></a>
+        </li>
+        <li>
+          <a href="/employment"><span>Employment</span></a>
+        </li>
+        <li>
+          <a href="/blog"><span>Blog</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="m-0">
+        <li>
+          <a href="/sustainability"><span>Sustainability</span></a>
+        </li>
+        <li>
+          <a href="/our-orchards"><span>Our Orchards</span></a>
+        </li>
+        <li>
+          <a href="/our-facility"><span>Our Facility</span></a>
+        </li>
+        <li>
+          <a href="/quality-assurance"><span>Quality Assurance</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-4 flex justify-between items-center gap-4 typography">
+    <p>
+      &copy; Adelaide Hills Fresh {new Date().getFullYear()}. All rights
+      reserved.
+    </p>
+    <p class="mt-0">
+      Website by <a href="https://composedigital.agency?utm_source=client&utm_medium=organic_social&utm_campaign=always_on&utm_content=attribution" rel="external">Compose Digital</a>
+    </p>
+  </div>
+</footer>

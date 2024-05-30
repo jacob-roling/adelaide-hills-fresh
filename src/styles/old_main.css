@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+@import "@radix-ui/colors/ruby.css";
+@import "@radix-ui/colors/ruby-dark.css";
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/lime.css";
+@import "@radix-ui/colors/lime-dark.css";
+
+@import "tailwindcss";
+/* @import "@jroling/cleancss/base" layer(base); */
+@import "@jroling/cleancss/components" layer(components);
+@import "@jroling/cleancss/utilities" layer(utilities);
+
+@theme {
+  --font-family-display: "Lora", serif;
+  --font-family-sans: "DM Sans", sans-serif;
+
+  --font-size-fluid: clamp(1rem, 2vw, 1.25rem);
+  
+  --font-size-xs--line-height: initial;
+  --font-size-sm--line-height: initial;
+  --font-size-base--line-height: initial;
+  --font-size-md--line-height: initial;
+  --font-size-lg--line-height: initial;
+  --font-size-xl--line-height: initial;
+  --font-size-2xl--line-height: initial;
+  --font-size-3xl--line-height: initial;
+  --font-size-4xl--line-height: initial;
+  --font-size-5xl--line-height: initial;
+  --font-size-6xl--line-height: initial;
+  --font-size-7xl--line-height: initial;
+  --font-size-8xl--line-height: initial;
+  --font-size-9xl--line-height: initial;
+
+  --color-*: initial;
+
+  --color-primary-contrast: white;
+  --color-primary-1: var(--ruby-1);
+  --color-primary-2: var(--ruby-2);
+  --color-primary-3: var(--ruby-3);
+  --color-primary-4: var(--ruby-4);
+  --color-primary-5: var(--ruby-5);
+  --color-primary-6: var(--ruby-6);
+  --color-primary-7: var(--ruby-7);
+  --color-primary-8: var(--ruby-8);
+  --color-primary-9: var(--ruby-9);
+  --color-primary-10: var(--ruby-10);
+  --color-primary-11: var(--ruby-11);
+  --color-primary-12: var(--ruby-12);
+
+  --color-neutral-contrast: white;
+  --color-neutral-1: var(--gray-1);
+  --color-neutral-2: var(--gray-2);
+  --color-neutral-3: var(--gray-3);
+  --color-neutral-4: var(--gray-4);
+  --color-neutral-5: var(--gray-5);
+  --color-neutral-6: var(--gray-6);
+  --color-neutral-7: var(--gray-7);
+  --color-neutral-8: var(--gray-8);
+  --color-neutral-9: var(--gray-9);
+  --color-neutral-10: var(--gray-10);
+  --color-neutral-11: var(--gray-11);
+  --color-neutral-12: var(--gray-12);
+
+  --color-secondary-contrast: white;
+  --color-secondary-1: var(--lime-1);
+  --color-secondary-2: var(--lime-2);
+  --color-secondary-3: var(--lime-3);
+  --color-secondary-4: var(--lime-4);
+  --color-secondary-5: var(--lime-5);
+  --color-secondary-6: var(--lime-6);
+  --color-secondary-7: var(--lime-7);
+  --color-secondary-8: var(--lime-8);
+  --color-secondary-9: var(--lime-9);
+  --color-secondary-10: var(--lime-10);
+  --color-secondary-11: var(--lime-11);
+  --color-secondary-12: var(--lime-12);
+}
+
+:root {
+  --color: var(--color-neutral-12);
+  --background-color: var(--color-neutral-3);
+  --border-color: var(--color-neutral-6);
+  --highlight-color: var(--color-neutral-7);
+  --outline-color: var(--color-primary-9);
+  --border-width: 1px;
+  --border-radius: 0px;
+  --font-family: var(--font-family-sans);
+  --typography-heading-scale: 1.25;
+  --highlight-color: transparent;
+  --text-decoration-color: var(--color-neutral-6);
+  --text-decoration-thickness: 1px;
+  --table-background-color-alternate: var(--color-neutral-2);
+  --tooltip-padding: 16;
+  --tooltip-offset: 4;
+
+  --container-padding: 2rem;
+  --_container-padding: var(--container-padding);
+
+  @media (min-width: 640px) {
+    --_container-padding: calc(var(--container-padding) + 50vw - (var(--breakpoint-sm) / 2));
+  }
+
+  @media (min-width: 768px) {
+    --_container-padding: calc(var(--container-padding) + 50vw - (var(--breakpoint-md) / 2));
+  }
+
+  @media (min-width: 1024px) {
+    --_container-padding: calc(var(--container-padding) + 50vw - (var(--breakpoint-lg) / 2));
+  }
+
+  @media (min-width: 1280px) {
+    --_container-padding: calc(var(--container-padding) + 50vw - (var(--breakpoint-xl) / 2));
+  }
+}
+
+body {
+  color: var(--color-neutral-11);
+  background-color: var(--color-neutral-1);
+}
+
+.card {
+  --background-color: var(--color-neutral-2);
+
+  &.primary {
+    --background-color: var(--color-primary-2);
+    --border-color: var(--color-primary-6);
+  }
+
+  &.secondary {
+    --background-color: var(--color-secondary-2);
+    --border-color: var(--color-secondary-6);
+
+    &.solid {
+      --color: var(--color-secondary-contrast);
+      --background-color: var(--color-secondary-9);
+      --border-color: var(--color-secondary-9);
+    }
+  }
+}
+
+.typography {  
+  & :where(h1, h2) {
+    font-family: var(--font-family-display);
+  }
+
+  & :where(h1, h2, h3) {
+    color: var(--color-neutral-12);
+  }
+
+  & :where(li) {
+    &::marker {
+      color: var(--color-neutral-12);
+    }
+  }
+
+  & :where(a) {
+    color: var(--color-neutral-12);
+
+    &:hover {
+      text-decoration-color: var(--color-neutral-12);
+    }
+  }
+}
+
+.separator,
+hr {
+  --border-width: 1px;
+}
+
+::selection {
+  color: var(--color-primary-contrast);
+  background-color: var(--color-primary-9);
+}
+
+.button {
+  --color: var(--color-neutral-11);
+  --background-color: transparent;
+  --border-color: transparent;
+  --highlight-color: transparent;
+
+  &:hover {
+    --color: var(--color-neutral-12);
+    --background-color: var(--color-neutral-4);
+  }
+
+  &.underline {
+    --color: var(--color-neutral-12);
+    --background-color: transparent;
+    text-decoration-color: transparent;
+    text-decoration-style: underline;
+
+    &:hover {
+      text-decoration-color: var(--color-neutral-12);
+    }
+  }
+
+  &.primary {
+    --color: var(--color-primary-12);
+    --background-color: var(--color-primary-3);
+    --border-color: var(--color-primary-7);
+
+    &:hover {
+      --border-color: var(--color-primary-8);
+    }
+
+    &:active {
+      --background-color: var(--color-primary-5);
+    }
+
+    &.solid {
+      --color: var(--color-primary-contrast);
+      --background-color: var(--color-primary-9);
+      --border-color: color-mix(in srgb, var(--color-primary-9) 85%, black);
+      --highlight-color: color-mix(in srgb, var(--color-primary-9) 75%, white);
+
+      &:hover {
+        --background-color: var(--color-primary-10);
+      }
+
+      &:active {
+        --background-color: var(--color-primary-11);
+      }
+    }
+  }
+
+  &.neutral {
+    --color: var(--color-neutral-12);
+    --background-color: var(--color-neutral-3);
+    --border-color: var(--color-neutral-7);
+
+    &:hover {
+      --border-color: var(--color-neutral-8);
+    }
+
+    &:active {
+      --background-color: var(--color-neutral-5);
+    }
+
+    &.solid {
+      --color: var(--color-neutral-contrast);
+      --background-color: var(--color-neutral-9);
+      --border-color: color-mix(in srgb, var(--color-neutral-9) 85%, black);
+      --highlight-color: color-mix(in srgb, var(--color-neutral-9) 75%, white);
+
+      &:hover {
+        --background-color: var(--color-neutral-10);
+      }
+
+      &:active {
+        --background-color: var(--color-neutral-11);
+      }
+    }
+  }
+}
+
+.input {
+  &.neutral {
+    --color: var(--color-neutral-12);
+    --placeholder-color: var(--color-neutral-12);
+    --background-color: var(--color-neutral-3);
+    --border-color: var(--color-neutral-7);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(fade) {
+  animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+}
+
+::view-transition-new(fade) {
+  animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in;
+}
+
+.fade-transition {
+  view-transition-name: fade;
+}

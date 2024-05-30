@@ -1,0 +1,20 @@
+---
+const { list } = Astro.props;
+---
+
+<section>
+  <h2 class="sr-only">Job list</h2>
+  <ul
+    class="container grid grid-cols-1 md:grid-cols-2 list-none space-x-16 space-y-4 divide-[var(--color-6)] divide-y md:divide-none"
+    role="list"
+  >
+    {
+      list.map(({ title, description }) => (
+        <li class="m-0 p-4 bg-[var(--color-3)] rounded-[0.5rem]">
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
