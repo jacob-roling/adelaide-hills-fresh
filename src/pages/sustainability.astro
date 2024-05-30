@@ -1,0 +1,61 @@
+---
+import Base from "@layouts/Base.astro";
+import { SEO } from "astro-seo";
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import urlForImage from "@utils/urlForImage";
+
+const page: any = await sanityClient.fetch(
+  `*[_id == "1cee0061-6353-41f8-96ee-890a3f72d819"][0]`
+);
+---
+
+<Base>
+  <SEO slot="head" title={page.title} description={page.description} />
+
+  <main id="main" class="text-fluid">
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+      <div class="pr-container md:pr-0 pl-container pb-[4em] pt-[8em] md:col-span-2 typography">
+        <h1>{page.hero.heading}</h1>
+        <PortableText value={page.hero.content} />
+      </div>
+      <div>
+        <img
+          class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
+          src={urlForImage(page.hero.image).url()}
+          alt={page.hero.image.alt}
+        />
+      </div>
+    </section>
+
+    <section>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="md:col-span-2 typography pl-container md:pl-0 pr-container py-[4em] md:order-last">
+          <h2>{page.sections[0].heading}</h2>
+          <PortableText value={page.sections[0].content} />
+        </div>
+        <div>
+          <img
+            class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
+            src={urlForImage(page.sections[0].image).url()}
+            alt={page.sections[0].image.alt}
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+      <div class="md:col-span-2 py-[4em] pl-container pr-container md:pr-0 typography">
+        <h2>{page.sections[1].heading}</h2>
+        <PortableText value={page.sections[1].content} />
+      </div>
+      <div>
+        <img
+          class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
+          src={urlForImage(page.sections[1].image).url()}
+          alt={page.sections[1].image.alt}
+        />
+      </div>
+    </section>
+  </main>
+</Base>

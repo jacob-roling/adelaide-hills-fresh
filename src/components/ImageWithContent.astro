@@ -1,0 +1,20 @@
+---
+import urlForImage from "@utils/urlForImage";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "./SanityImage.astro";
+
+const { content, image, imageFirst = false } = Astro.props;
+---
+
+<section>
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+      <div>
+        <PortableText value={content} />
+      </div>
+      <div class:list={[{ "md:order-first": imageFirst, "order-last": true }]}>
+        <SanityImage image={image} />
+      </div>
+    </div>
+  </div>
+</section>

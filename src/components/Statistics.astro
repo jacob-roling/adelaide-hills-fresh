@@ -1,0 +1,30 @@
+---
+import { PortableText } from "astro-portabletext";
+
+const { heading, content, statistics } = Astro.props;
+---
+
+<section class="bg-[var(--color-2)] primary">
+  <div class="container">
+    <h2 class="h2 font-display">{heading}</h2>
+
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 xl:gap-x-32">
+      <div>
+        <PortableText value={content} />
+      </div>
+
+      <dl class="flex lg:flex-col gap-x-4 gap-y-8">
+        {
+          statistics.map(({ statistic, description }) => (
+            <div class="flex flex-col-reverse gap-y-2">
+              <dt>{description}</dt>
+              <dd class="text-5xl font-display text-[var(--color-12)]">
+                {statistic}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

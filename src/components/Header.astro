@@ -1,0 +1,117 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Logo from "#assets/logo.png";
+---
+
+<header
+  id="header"
+  class="sticky w-full top-0 left-0 z-10 border-b bg-neutral-background-subtle py-2 container"
+  transition:persist
+>
+  <nav aria-label="primary">
+    <ul class="flex items-center">
+      <li class="grow">
+        <a class="block" href="/">
+          <Image
+            class="h-[80px] w-auto"
+            slot="logo"
+            src={Logo}
+            alt="Adelaide Hills Fresh Logo"
+            height="200"
+            quality="max"
+          />
+          <span class="sr-only">Home</span>
+        </a>
+      </li>
+      <li data-controller="disclosure">
+        <button
+          class="button icon group peer lg:hidden justify-center"
+          data-disclosure-target="button"
+        >
+          <Icon
+            class="group-aria-expanded:hidden text-2xl"
+            name="heroicons:bars-3"
+            aria-hidden="true"
+          />
+          <Icon
+            class="hidden group-aria-expanded:block text-2xl"
+            name="heroicons:x-mark"
+            aria-hidden="true"
+          />
+          <span class="sr-only">Mobile Menu</span>
+        </button>
+        <ul
+          class="lg:flex [&>li>.button]:justify-center [&>li>.button]:px-[1em] items-center absolute left-0 top-full hidden data-[expanded]:block w-full h-screen lg:h-max py-1 lg:py-0 border-t lg:static lg:border-none bg-[var(--color-1)] lg:bg-transparent"
+          data-disclosure-target="panel"
+        >
+          <li>
+            <a class="button" href="/about-us">
+              About Us
+            </a>
+          </li>
+          <li>
+            <a class="button" href="/our-apples">
+              Our Apples
+            </a>
+          </li>
+          <li>
+            <a class="button" href="/fruit-australia">
+              Fruit Australia
+            </a>
+          </li>
+          <li class="relative" data-controller="disclosure popover" data-popover-placement-value="top-start">
+            <button class="button group" data-disclosure-target="button">
+              Our Operation
+              <Icon
+                class="group-aria-expanded:rotate-180 transition-transform"
+                name="heroicons:chevron-down"
+                aria-hidden="true"
+              />
+            </button>
+            <ul data-disclosure-target="panel" data-popover-target="popover" class="list card w-max absolute invisible scale-95 opacity-0 transition-all origin-top data-[expanded]:visible data-[expanded]:opacity-100 data-[expanded]:scale-100" style="--_padding: 0.25em">
+              <li>
+                <a class="button" href="/sustainability">
+                  <span class="grow">
+                    Sustainability
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="button" href="/our-orchards">
+                  <span class="grow">
+                    Our Orchards
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="button" href="/our-facility">
+                  <span class="grow">
+                    Our Facility
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="button" href="/quality-assurance">
+                  <span class="grow">
+                    Quality Assurance
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="button" href="/employment">
+              Employment
+            </a>
+          </li>
+         <li>
+            <a class="button" href="/blog">
+              Blog
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>

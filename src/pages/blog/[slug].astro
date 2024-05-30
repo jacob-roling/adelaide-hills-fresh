@@ -1,0 +1,50 @@
+---
+import { sanityClient } from "sanity:client";
+import Base from "@layouts/Base.astro";
+import { PortableText } from "astro-portabletext";
+import { SEO } from "astro-seo";
+import urlForImage from "@utils/urlForImage";
+
+export async function getStaticPaths() {
+  const posts = await sanityClient.fetch(
+    `*[_type == "post" && defined(slug)] | order(_createdAt desc)`
+  );
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.slug.current,
+    },
+    props: {
+      ...post,
+    },
+  }));
+}
+
+const { title, description, image, content }: any = Astro.props;
+---
+
+<Base>
+  <SEO slot="head" title={title} description={description} />
+
+  <main id="main" class="px-container text-fluid">
+    <article class="max-w-max mx-auto py-[8rem] typography">
+      <header class="typography">
+        <figure>
+          <img
+            class="max-h-[384px] object-cover object-center aspect-[3/2]"
+            src={urlForImage(image).height(500).url()}
+            alt={image.alt}
+            height="384"
+          />
+          {
+            "attribution" in image ? (
+              <figcaption>{image.attribution}</figcaption>
+              ) : null
+            }
+        </figure>
+        <h1>{title}</h1>
+      </header>
+      <PortableText value={content} />
+    </article>
+  </main>
+</Base>

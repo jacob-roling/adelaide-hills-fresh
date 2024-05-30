@@ -1,0 +1,30 @@
+---
+import Statistics from "./Statistics.astro";
+import FeaturedImage from "./FeaturedImage.astro";
+import Team from "./Team.astro";
+import ImageWithList from "./ImageWithList.astro";
+import ImageWithContent from "./ImageWithContent.astro";
+import FeaturedList from "./FeaturedList.astro";
+
+const { sections } = Astro.props;
+---
+
+{
+  sections.map((section) => {
+    switch (section._type) {
+      case "statistics":
+        return <Statistics {...section} />;
+      case "featuredImage":
+        return <FeaturedImage {...section} />;
+      case "team":
+        return <Team {...section} />;
+      case "imageWithList":
+        return <ImageWithList {...section} />;
+      case "imageWithContent":
+        return <ImageWithContent {...section} />;
+      case "featuredList":
+        return <FeaturedList {...section} />;
+    }
+    return null;
+  })
+}

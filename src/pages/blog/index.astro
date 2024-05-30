@@ -1,0 +1,64 @@
+---
+import Time from "@components/Time.astro";
+import Base from "@layouts/Base.astro";
+import urlForImage from "@utils/urlForImage";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { sanityClient } from "sanity:client";
+
+const posts = await sanityClient.fetch(
+  `*[_type == "post" && defined(slug)] | order(_createdAt desc){title,description,image,slug,author->}`
+);
+---
+
+<Base>
+  <main id="main" class="text-fluid">
+    <section>
+      <div class="pt-[8em] pb-[4em] px-container typography">
+        <h1>From the Blog</h1>
+        <p>The latest news from Adelaide Hills Fresh.</p>
+        <div class="mt-[4em] grid grid-cols-1 lg:grid-cols-3 text-left gap-x-16 gap-y-4">
+          {
+            posts.map(({ image, title, description, slug, author }) => (
+              <article class="relative flex lg:block">
+                <div class="mb-4 shrink-0">
+                  <Image
+                    class="w-auto h-[128px] lg:h-auto lg:w-full aspect-square object-cover"
+                    src={urlForImage(image).url()}
+                    alt="Author"
+                    width="500"
+                    height="256"
+                  />
+                </div>
+                <div class="px-4 pb-4 typography text-base">
+                  <Time class="text-[.875em]" />
+                  <h3 class="mt-0">
+                    <a href={`/blog/${slug.current}`}>
+                      {title}
+                      <span class="absolute inset-0" aria-hidden="true"></span>
+                    </a>
+                  </h3>
+                  <p class="mt-2">{description}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+
+<!-- <div class="flex gap-4 items-center">
+  <Image
+    class="h-[48px] rounded-full aspect-square object-cover"
+    src={urlForImage(author.image).url()}
+    alt="Author"
+    width="48"
+    height="48"
+  />
+  <span>
+    {author.firstName} {author.lastName}
+  </span>
+</div> -->

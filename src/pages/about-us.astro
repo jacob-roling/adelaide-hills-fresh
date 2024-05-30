@@ -1,0 +1,103 @@
+---
+import Base from "#layouts/Base.astro";
+import { Image } from "astro:assets";
+import { sanityClient } from "sanity:client";
+import { SEO } from "astro-seo";
+import { PortableText } from "astro-portabletext";
+import Sections from "#components/Sections.astro";
+import ImageWithContent from "#components/ImageWithContent.astro";
+import urlForImage from "#utils/urlForImage";
+
+const page: any = await sanityClient.fetch(
+  `*[_id == "cf4db5b3-0936-4584-867c-cedc5a54e58b"][0] {
+    ..., 
+    "sections": sections[] {
+      ...,
+      members[]->
+  }}`
+);
+---
+
+<Base>
+  <SEO slot="head" title={page.title} description={page.description} />
+
+  <main id="main" class="container typography">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+      <div class="md:col-span-2 md:order-last pb-[4em] pt-header">
+        <h1>{page.hero.heading}</h1>
+        <PortableText value={page.hero.content} />
+      </div>
+      <div>
+        <Image
+          class="object-center object-cover !mt-0 h-full w-full"
+          src={urlForImage(page.hero.image).width(800).url()}
+          inferSize
+          alt={page.hero.image.alt}
+        />
+      </div>
+    </div>
+
+    <div class="breakout container py-[4em]">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
+        <div class="md:col-span-2">
+          <h2>{page.sections[0].heading}</h2>
+          <PortableText value={page.sections[0].content} />
+        </div>
+        <dl>
+          {
+            page.sections[0].statistics.map(({ statistic, description }) => (
+              <dt class="text-4xl">{statistic}</dt>
+              <dd class="mb-4">
+                {description}
+              </dd>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <img
+      class="hidden md:block breakout w-full h-[300px] md:h-[400px] lg:h-[500px] object-center object-cover !mt-0"
+      src={urlForImage(page.sections[1]).url()}
+      alt="Apples"
+    />
+
+    <section>
+      <div
+        class="py-[4em] grid grid-cols-1 gap-x-16 gap-y-16 xl:grid-cols-3"
+      >
+        <div>
+          <h2>{page.sections[2].heading}</h2>
+    
+          <PortableText value={page.sections[2].content} />
+        </div>
+    
+        <ul
+          role="list"
+          class="not-prose grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none xl:col-span-2"
+        >
+          {
+            page.sections[2].members.map(({ firstName, lastName, image, role, description }) => (
+              <li class="pl-0">
+                <Image
+                  class="height-[400px] aspect-[3/2] w-full object-cover object-center mb-4"
+                  src={urlForImage(image).width(400).height(400).quality(100).url()}
+                  alt={`${firstName} ${lastName}`}
+                  width="600"
+                  height="400"
+                />
+                <div class="hgroup">
+                  <h3>
+                    {firstName} {lastName}
+                  </h3>
+                  <p>{role}</p>
+                </div>
+                <p>{description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</Base>
