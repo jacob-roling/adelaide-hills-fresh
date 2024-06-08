@@ -6,6 +6,12 @@ export default defineType({
   title: "Person",
   type: "document",
   icon: UsersIcon,
+  preview: {
+    select: {
+      title: "firstName",
+      media: "image.src",
+    },
+  },
   fields: [
     defineField({
       title: "First Name",
@@ -34,6 +40,7 @@ export default defineType({
     defineField({
       type: "imageWithAlt",
       name: "image",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 });

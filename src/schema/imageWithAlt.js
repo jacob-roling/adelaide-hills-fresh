@@ -6,6 +6,12 @@ export default defineType({
   title: "Image",
   type: "object",
   icon: ImageIcon,
+  preview: {
+    select: {
+      title: "alt",
+      media: "src",
+    },
+  },
   fields: [
     defineField({
       name: "src",

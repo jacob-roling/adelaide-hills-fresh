@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ],
+  "astroAllowShorthand": true,
+  "attributeGroups": ["$CODE_GUIDE"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import Logo from "#assets/logo.png";
 
 <header
   id="header"
-  class="sticky w-full top-0 left-0 z-10 border-b bg-neutral-background-subtle py-2 container"
+  class="bg-neutral-background-subtle container sticky top-0 left-0 z-10 w-full border-b py-2"
   transition:persist
 >
   <nav aria-label="primary">
@@ -20,95 +20,87 @@ import Logo from "#assets/logo.png";
             alt="Adelaide Hills Fresh Logo"
             height="200"
             quality="max"
+            loading="eager"
           />
           <span class="sr-only">Home</span>
         </a>
       </li>
       <li data-controller="disclosure">
         <button
-          class="button icon group peer lg:hidden justify-center"
+          class="button icon group peer justify-center lg:hidden"
           data-disclosure-target="button"
         >
           <Icon
-            class="group-aria-expanded:hidden text-2xl"
+            class="text-2xl group-aria-expanded:hidden"
             name="heroicons:bars-3"
             aria-hidden="true"
           />
           <Icon
-            class="hidden group-aria-expanded:block text-2xl"
+            class="hidden text-2xl group-aria-expanded:block"
             name="heroicons:x-mark"
             aria-hidden="true"
           />
           <span class="sr-only">Mobile Menu</span>
         </button>
         <ul
-          class="lg:flex [&>li>.button]:justify-center [&>li>.button]:px-[1em] items-center absolute left-0 top-full hidden data-[expanded]:block w-full h-screen lg:h-max py-1 lg:py-0 border-t lg:static lg:border-none bg-[var(--color-1)] lg:bg-transparent"
+          class="absolute top-full left-0 hidden h-screen w-full items-center border-t bg-[var(--color-1)] py-1 data-[expanded]:block lg:static lg:flex lg:h-max lg:border-none lg:bg-transparent lg:py-0 [&>li>.button]:justify-center [&>li>.button]:px-[1em]"
           data-disclosure-target="panel"
         >
           <li>
-            <a class="button" href="/about-us">
-              About Us
-            </a>
+            <a class="button" href="/about-us"> About Us </a>
           </li>
           <li>
-            <a class="button" href="/our-apples">
-              Our Apples
-            </a>
+            <a class="button" href="/our-apples"> Our Apples </a>
           </li>
           <li>
-            <a class="button" href="/fruit-australia">
-              Fruit Australia
-            </a>
+            <a class="button" href="/fruit-australia"> Fruit Australia </a>
           </li>
-          <li class="relative" data-controller="disclosure popover" data-popover-placement-value="top-start">
+          <li
+            class="relative"
+            data-controller="disclosure popover"
+            data-popover-placement-value="top-start"
+          >
             <button class="button group" data-disclosure-target="button">
               Our Operation
               <Icon
-                class="group-aria-expanded:rotate-180 transition-transform"
+                class="transition-transform group-aria-expanded:rotate-180"
                 name="heroicons:chevron-down"
                 aria-hidden="true"
               />
             </button>
-            <ul data-disclosure-target="panel" data-popover-target="popover" class="list card w-max absolute invisible scale-95 opacity-0 transition-all origin-top data-[expanded]:visible data-[expanded]:opacity-100 data-[expanded]:scale-100" style="--_padding: 0.25em">
+            <ul
+              data-disclosure-target="panel"
+              data-popover-target="popover"
+              class="list card invisible absolute w-max origin-top scale-95 opacity-0 transition-all data-[expanded]:visible data-[expanded]:scale-100 data-[expanded]:opacity-100"
+              style="--_padding: 0.25em"
+            >
               <li>
                 <a class="button" href="/sustainability">
-                  <span class="grow">
-                    Sustainability
-                  </span>
+                  <span class="grow"> Sustainability </span>
                 </a>
               </li>
               <li>
                 <a class="button" href="/our-orchards">
-                  <span class="grow">
-                    Our Orchards
-                  </span>
+                  <span class="grow"> Our Orchards </span>
                 </a>
               </li>
               <li>
                 <a class="button" href="/our-facility">
-                  <span class="grow">
-                    Our Facility
-                  </span>
+                  <span class="grow"> Our Facility </span>
                 </a>
               </li>
               <li>
                 <a class="button" href="/quality-assurance">
-                  <span class="grow">
-                    Quality Assurance
-                  </span>
+                  <span class="grow"> Quality Assurance </span>
                 </a>
               </li>
             </ul>
           </li>
           <li>
-            <a class="button" href="/employment">
-              Employment
-            </a>
+            <a class="button" href="/employment"> Employment </a>
           </li>
-         <li>
-            <a class="button" href="/blog">
-              Blog
-            </a>
+          <li>
+            <a class="button" href="/blog"> Blog </a>
           </li>
         </ul>
       </li>

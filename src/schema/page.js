@@ -104,7 +104,8 @@ export default defineType({
           fields: [
             defineField({
               type: "array",
-              name: "List",
+              name: "list",
+              title: "List",
               validation: (Rule) => Rule.required(),
               of: [
                 defineArrayMember({
@@ -112,6 +113,12 @@ export default defineType({
                   to: [
                     defineArrayMember({
                       type: "person",
+                    }),
+                    defineArrayMember({
+                      type: "apple",
+                    }),
+                    defineArrayMember({
+                      type: "orchard",
                     }),
                   ],
                 }),
@@ -127,7 +134,8 @@ export default defineType({
           fields: [
             defineField({
               type: "array",
-              name: "List",
+              name: "list",
+              title: "List",
               validation: (Rule) => Rule.required(),
               of: [
                 defineArrayMember({
