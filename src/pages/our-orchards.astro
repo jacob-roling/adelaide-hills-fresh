@@ -1,75 +1,97 @@
 ---
 import Base from "#layouts/Base.astro";
+import { PortableText } from "astro-portabletext";
+import "leaflet/dist/leaflet.css";
+import { sanityClient } from "sanity:client";
 import { Icon } from "astro-icon/components";
-import "leaflet/dist/leaflet.css"
+
+// @ts-ignore
+const { content } = await sanityClient.getDocument(
+  "874d04f8-ccac-4ad7-b2c1-0acbb6dc2cc6",
+);
+
+const orchards = await Promise.all(
+  content[2].list.map(async ({ _ref }) => await sanityClient.getDocument(_ref)),
+);
 ---
 
 <Base>
-  <main id="main">
-    <section class="pt-32 pb-16">
+  <main id="main" class="container typography">
+    <section class="pt-header pb-8">
+      <h1>{content[0].heading}</h1>
+      <PortableText value={content[1].content} />
     </section>
 
-    <section class="grid grid-cols-2 card w-full">
-      <div class="min-h-[500px] h-full isolate" id="map" data-controller="map" data-map-lat-value="-34.9032" data-map-lng-value="138.9317" data-map-zoom-value="12" class="h-[500px] rounded isolate">
+    <section class="breakout flex" data-controller="tabs">
+      <div
+        class="h-full min-h-[500px] grow"
+        id="map"
+        data-controller="map"
+        data-map-lat-value="-34.9032"
+        data-map-lng-value="138.9317"
+        data-map-zoom-value="13"
+        class="aspect-video h-[500px]"
+        data-tabs-target="list"
+      >
+        {
+          orchards.map(({ location: { latitude, longitude } }) => (
+            <button
+              class="button icon"
+              data-tabs-target="tab"
+              data-latitude={latitude}
+              data-longitude={longitude}
+            >
+              <span class="sr-only" />
+              <Icon name="noto:red-apple" aria-hidden="true" />
+            </button>
+          ))
+        }
       </div>
-      <div class="typography px-8 py-16 border-l border-solid border-neutral-6 pr-container overflow-y-scroll">
-        <h2 class="mt-0">Test</h2>
-        <div class="divide-y">
-          <div data-controller="disclosure">
-            <h3 class="mt-0">
-              <button class="button px-0 w-full group underline" data-disclosure-target="button" aria-expanded="true">
-                <span class="grow">
-                  Test
-                </span>
-                <Icon
-                class="group-aria-expanded:rotate-180 transition-transform"
-                  name="heroicons:chevron-down"
-                  aria-hidden="true"
-                />
-              </button>
-            </h3>
-            <div class="overflow-hidden grid grid-rows-[0fr] data-[expanded]:grid-rows-[1fr] transition-all duration-300" data-disclosure-target="panel" data-expanded="true">
-              <div class="min-h-0 typography" style="--typography-scale: 0.875">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi iusto odit, veritatis amet et rerum doloremque reprehenderit aliquid debitis eum illum exercitationem quaerat. Perferendis magni, ipsum rem earum harum facere.
-                </p>
-              </div>
+
+      <div class="overflow-y-scroll py-8 px-8">
+        {
+          orchards.map(({ name, content }) => (
+            <div
+              data-tabs-target="panel"
+              class="hidden data-[tabs-selected]:block"
+            >
+              <h2>{name}</h2>
+              <PortableText value={content} />
             </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
+    </section>
   </main>
-</Base>
-    
-<script>
-  import Map from "#controllers/map";
-  import L from "leaflet";
 
-  document.addEventListener("stimulus:loaded", () => {
-    window.Stimulus.register("map", Map);
+  <script>
+    import Map from "#controllers/map";
+    import L from "leaflet";
 
-    document.getElementById("map")!.addEventListener("map:loaded", (event: any) => {
-      const map = event.detail;
+    document.addEventListener("stimulus:loaded", () => {
+      window.Stimulus.register("map", Map);
 
-      let customIcon = L.icon({
-        iconUrl: '/apple.png',
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
-        className: ''
-      });
-
-      let marker = L.marker([-34.9032, 138.9317], { icon: customIcon }).addTo(
-        map
-      );
-
-      let markerEl = marker.getElement();
+      document
+        .getElementById("map")
+        ?.addEventListener("map:loaded", (event: any) => {
+          const map = event.detail;
+          Array.from(
+            document.querySelectorAll("[role='tab']").values(),
+          ).forEach((marker: any) => {
+            L.marker([marker.dataset.latitude, marker.dataset.longitude], {
+              icon: L.divIcon({
+                html: marker.outerHTML,
+              }),
+            }).addTo(map);
+          });
+        });
     });
-  });
-</script>
+  </script>
 
-<style is:global>
-  .leaflet-container {
-    font-size: inherit;
-    font-family: inherit;
-  }
-</style>
+  <style is:global>
+    .leaflet-container {
+      font-size: inherit;
+      font-family: inherit;
+    }
+  </style>
+</Base>

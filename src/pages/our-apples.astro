@@ -1,22 +1,76 @@
 ---
 import Base from "#layouts/Base.astro";
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import { Image } from "astro:assets";
+import urlForImage from "#utils/urlForImage";
+import { Icon } from "astro-icon/components";
+
+// @ts-ignore
+const { title, description, content } = await sanityClient.getDocument(
+  "6c74a027-f956-4eb9-b9ad-759705ebb67f",
+);
+
+const apples = await sanityClient.fetch(`*[_type == "apple"]`);
 ---
 
 <Base>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </Fragment>
+
   <main id="main" class="typography container">
-    <div class="pt-header grid grid-cols-2">
+    <div class="pt-header">
       <div>
-        <h1>Our Apples</h1>
-        <p>Mr Apple is New Zealand's largest integrated grower, packer and exporter of apples, sending 25% of New Zealand's apple crop to key markets around the world.</p>
-        <p>From the start, we’ve only ever done apples – it’s what we’re passionate about.  It sounds crazy – but we do love apples – and we may be a little obsessed.  We always believe we can do better – our 5 point promise shows the commitment we have to growing safe, crunchy and delicious apples.</p>
+        <h1>{content[0].heading}</h1>
+        <PortableText value={content[1].content} />
       </div>
     </div>
 
-    <div>Apple Grid</div>
+    <ul
+      class="m-0 grid max-w-full grid-cols-1 gap-8 sm:grid-cols-3"
+      role="list"
+    >
+      <li
+        class="grid-cols-1 grid-cols-2 gap-8 sm:col-span-3 sm:grid"
+        role="listitem"
+      >
+        <Image
+          class="aspect-square h-auto w-full rounded object-cover object-center sm:order-last"
+          src={urlForImage(apples[0].image.src).url()}
+          alt={apples[0].image.alt}
+          inferSize
+        />
+        <div>
+          <h2 class="mt-[1em] sm:mt-0">{apples[0].title}</h2>
+          <p>{apples[0].description}</p>
+        </div>
+      </li>
+      {
+        apples.slice(1).map(({ title, image, description }) => (
+          <li role="listitem">
+            <Image
+              class="aspect-square h-auto w-full rounded object-cover object-center"
+              src={urlForImage(image.src).url()}
+              alt={image.alt}
+              inferSize
+            />
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </li>
+        ))
+      }
+    </ul>
 
-    <h2 id="apple-variety-availability">Apple Variety Availability</h2>
+    <h2 id="availability">Apple Variety Availability</h2>
 
-    <div class="table-container" role="region" aria-labelledby="apple-variety-availability" tabindex="0">
+    <div
+      class="table-container mt-4 mb-8 max-h-max"
+      role="region"
+      aria-labelledby="availability"
+      tabindex="0"
+    >
       <table>
         <thead>
           <tr>
@@ -28,6 +82,7 @@ import Base from "#layouts/Base.astro";
             <th>May</th>
             <th>June</th>
             <th>July</th>
+            <th>August</th>
             <th>September</th>
             <th>October</th>
             <th>November</th>
@@ -35,48 +90,27 @@ import Base from "#layouts/Base.astro";
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Royal Gala</td>
-            <td class="bg-primary-solid"></td>
-            <td class="bg-primary-solid"></td>
-            <td class="bg-primary-solid"></td>
-            <td>2</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Pink Lady</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Granny Smith</td>
-            <td>1</td>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
+          {
+            apples.map(({ title, availability: { from, to } }) => (
+              <tr>
+                <td>{title}</td>
+                {Array(12)
+                  .fill(0)
+                  .map((_, i) => (
+                    <td>
+                      <Fragment>
+                        <Icon
+                          class="mx-auto"
+                          name={`heroicons:${i + 1 >= from && i < to ? "check" : "x-mark"}`}
+                          aria-hidden="true"
+                        />
+                        <span class="sr-only">{`${i + 1 >= from && i < to ? "Available" : "Not available"}`}</span>
+                      </Fragment>
+                    </td>
+                  ))}
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>

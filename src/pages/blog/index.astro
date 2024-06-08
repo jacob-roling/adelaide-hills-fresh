@@ -1,41 +1,44 @@
 ---
-import Time from "@components/Time.astro";
-import Base from "@layouts/Base.astro";
-import urlForImage from "@utils/urlForImage";
+import Time from "#components/Time.astro";
+import Base from "#layouts/Base.astro";
+import urlForImage from "#utils/urlForImage";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { sanityClient } from "sanity:client";
 
-const posts = await sanityClient.fetch(
-  `*[_type == "post" && defined(slug)] | order(_createdAt desc){title,description,image,slug,author->}`
-);
+// const posts = await sanityClient.fetch(
+//   `*[_type == "post" && defined(slug)] | order(_createdAt desc){title,description,image,slug,author->}`,
+// );
+const posts: any = [];
 ---
 
 <Base>
-  <main id="main" class="text-fluid">
+  <main id="main" class="container typography">
     <section>
-      <div class="pt-[8em] pb-[4em] px-container typography">
+      <div class="pt-header pb-[4em]">
         <h1>From the Blog</h1>
         <p>The latest news from Adelaide Hills Fresh.</p>
-        <div class="mt-[4em] grid grid-cols-1 lg:grid-cols-3 text-left gap-x-16 gap-y-4">
+        <div
+          class="mt-[4em] grid grid-cols-1 gap-x-16 gap-y-4 text-left lg:grid-cols-3"
+        >
           {
             posts.map(({ image, title, description, slug, author }) => (
               <article class="relative flex lg:block">
                 <div class="mb-4 shrink-0">
                   <Image
-                    class="w-auto h-[128px] lg:h-auto lg:w-full aspect-square object-cover"
+                    class="aspect-square h-[128px] w-auto object-cover lg:h-auto lg:w-full"
                     src={urlForImage(image).url()}
                     alt="Author"
                     width="500"
                     height="256"
                   />
                 </div>
-                <div class="px-4 pb-4 typography text-base">
+                <div class="relative">
                   <Time class="text-[.875em]" />
-                  <h3 class="mt-0">
+                  <h3>
                     <a href={`/blog/${slug.current}`}>
                       {title}
-                      <span class="absolute inset-0" aria-hidden="true"></span>
+                      <span class="expand-to-relative" aria-hidden="true" />
                     </a>
                   </h3>
                   <p class="mt-2">{description}</p>
@@ -48,7 +51,6 @@ const posts = await sanityClient.fetch(
     </section>
   </main>
 </Base>
-
 
 <!-- <div class="flex gap-4 items-center">
   <Image

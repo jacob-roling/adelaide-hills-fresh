@@ -9,7 +9,7 @@
 
 @import "./colors.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
 
 @custom-media --sm (min-width: 640px);
 @custom-media --md (min-width: 768px);
@@ -22,13 +22,14 @@
   --shadow: none;
   --radius: 0.25rem;
   --radius-container: 0.5rem;
-  --default-font-family: "Source Sans 3", Inter, Roboto, "Helvetica Neue", "Arial Nova",
-    "Nimbus Sans", Arial, sans-serif;
+  --default-font-family: "Source Sans 3", Inter, Roboto, "Helvetica Neue",
+    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  --tw-divide-y-reverse: 0;
 }
 
 @layer theme {
   :root {
-    color-scheme: light dark; 
+    color-scheme: light dark;
 
     --spacing-header: 4rem;
 
@@ -71,7 +72,12 @@
   }
 
   .typography {
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: "Libre Baskerville", serif;
     }
 
@@ -183,7 +189,7 @@
       background-color: var(--color-neutral-solid);
       border-color: var(--color-neutral-solid);
       color: var(--color-neutral-text-solid-contrast);
-  
+
       border-left-color: var(--color-neutral-border-element);
       border-top-color: var(--color-neutral-border-element);
 

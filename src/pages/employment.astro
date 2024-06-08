@@ -1,49 +1,56 @@
 ---
 import { sanityClient } from "sanity:client";
 import Base from "#layouts/Base.astro";
-import { SEO } from "astro-seo";
 import { PortableText } from "astro-portabletext";
-import urlForImage from "#utils/urlForImage";
+import SanityImage from "#components/SanityImage.astro";
 
-const page: any = await sanityClient.fetch(
-  `*[_id == "be399361-43d2-4225-ae1e-5ce4fde53ace"][0] {
-    ...
-}`);
+const { title, description, content }: any = await sanityClient.getDocument(
+  `17bde09f-4e53-4d5b-8220-09674ebaa146`,
+);
+
+const jobs = await sanityClient.fetch(
+  `*[_type == "job"] | order(_createdAt desc)`,
+);
 ---
 
 <Base>
-  <SEO slot="head" title={page.title} description={page.description} />
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </Fragment>
 
-  <main id="main">
-    <section class="section pt-32 prose">
-      <div class="container grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
-        <div class="md:col-span-2 md:mt-8">
-          <h1>{page.hero.heading}</h1>
-          <PortableText value={page.hero.content} />
-          <ul class="mt-8 not-prose divide-y divide-6" role="list">
-            {page.sections[0].list.map(({title, description}) => <li class="flex items-center gap-4 py-4">
-              <div class="grow">
-                <div class="text-lg label">
-                  {title}
-                </div>
-                <p class="mt-2">
-                  {description}
-                </p>
-              </div>
-              <div>
-                <button class="button primary underline">Apply Now</button>
-              </div>
-            </li>)}
-          </ul>
-        </div>
-        <div>
-          <img
-            class="w-full h-[300px] md:h-[400px] lg:h-[500px] object-center object-cover !mt-0"
-            src={urlForImage(page.hero.image).url()}
-            alt=""
-          />
-        </div>
+  <main id="main" class="container typography">
+    <section class="gap-16 sm:flex">
+      <div class="pt-header grow pb-[4em]">
+        <h1>{content[0].heading}</h1>
+        <PortableText value={content[1].content} />
+        {
+          jobs.length > 0 ? (
+            <ul class="not-prose mt-8 divide-y" role="list">
+              {jobs.map(({ title, description }) => (
+                <li class="flex items-center gap-4 py-4">
+                  <div class="grow">
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                  </div>
+                  <div>
+                    <button class="button outlined">Apply Now</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Sorry, we aren't hiring at the moment.</p>
+          )
+        }
       </div>
+      <di class="hidden sm:block">
+        <SanityImage
+          class="aspect-square h-[400px] w-auto object-cover object-center"
+          src={content[2].src}
+          alt={content[2].alt}
+        />
+      </di>
     </section>
   </main>
 </Base>

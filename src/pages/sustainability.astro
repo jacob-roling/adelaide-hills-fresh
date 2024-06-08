@@ -1,59 +1,63 @@
 ---
-import Base from "@layouts/Base.astro";
-import { SEO } from "astro-seo";
+import Base from "#layouts/Base.astro";
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
-import urlForImage from "@utils/urlForImage";
+import urlForImage from "#utils/urlForImage";
+import { Image } from "astro:assets";
 
-const page: any = await sanityClient.fetch(
-  `*[_id == "1cee0061-6353-41f8-96ee-890a3f72d819"][0]`
+const { title, description, content }: any = await sanityClient.getDocument(
+  `29d5a99e-2a06-4851-8de4-fcbee121c071`
 );
 ---
 
 <Base>
-  <SEO slot="head" title={page.title} description={page.description} />
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+  </Fragment>
 
-  <main id="main" class="text-fluid">
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
-      <div class="pr-container md:pr-0 pl-container pb-[4em] pt-[8em] md:col-span-2 typography">
-        <h1>{page.hero.heading}</h1>
-        <PortableText value={page.hero.content} />
+  <main id="main" class="container typography">
+    <section class="md:flex md:breakout-end gap-16">
+      <div class="pb-[4em] pt-header mr-auto">
+        <h1>{content[0].heading}</h1>
+        <PortableText value={content[1].content} />
       </div>
       <div>
-        <img
-          class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
-          src={urlForImage(page.hero.image).url()}
-          alt={page.hero.image.alt}
+        <Image
+          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          src={urlForImage(content[2].src).url()}
+          alt={content[2].alt}
+          inferSize
         />
       </div>
     </section>
 
-    <section>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
-        <div class="md:col-span-2 typography pl-container md:pl-0 pr-container py-[4em] md:order-last">
-          <h2>{page.sections[0].heading}</h2>
-          <PortableText value={page.sections[0].content} />
-        </div>
-        <div>
-          <img
-            class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
-            src={urlForImage(page.sections[0].image).url()}
-            alt={page.sections[0].image.alt}
-          />
-        </div>
+    <section class="md:flex md:breakout-start gap-16">
+      <div class="py-[4em] md:order-last">
+        <h1>{content[3].heading}</h1>
+        <PortableText value={content[4].content} />
+      </div>
+      <div>
+        <Image
+          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          src={urlForImage(content[5].src).url()}
+          alt={content[5].alt}
+          inferSize
+        />
       </div>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8">
-      <div class="md:col-span-2 py-[4em] pl-container pr-container md:pr-0 typography">
-        <h2>{page.sections[1].heading}</h2>
-        <PortableText value={page.sections[1].content} />
+    <section class="md:flex md:breakout-end gap-16">
+      <div class="py-[4em] mr-auto">
+        <h1>{content[6].heading}</h1>
+        <PortableText value={content[7].content} />
       </div>
       <div>
-        <img
-          class="w-full h-[300px] md:h-full object-center object-cover aspect-square"
-          src={urlForImage(page.sections[1].image).url()}
-          alt={page.sections[1].image.alt}
+        <Image
+          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          src={urlForImage(content[8].src).url()}
+          alt={content[8].alt}
+          inferSize
         />
       </div>
     </section>
