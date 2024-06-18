@@ -11,7 +11,7 @@ import playformInline from "@playform/inline";
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  site: "https://adelaidehillsfresh.com.au",
+  site: import.meta.env.SITE,
   devToolbar: {
     enabled: false,
   },

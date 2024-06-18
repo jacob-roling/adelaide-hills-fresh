@@ -11,7 +11,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="auto">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -22,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
     <slot name="head" />
   </head>
   <body class="text-[1.125rem]">
@@ -37,6 +37,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script>
       import { Application } from "@hotwired/stimulus";
       import { registerComponents } from "stimui";
+      import "unpoly";
+
+      window.up.log.disable();
+
+      window.up.link.config.followSelectors.push("a[href]");
+      window.up.link.config.instantSelectors.push("a[href]");
+      window.up.link.config.preloadSelectors.push("a[href]");
+
+      window.up.form.config.submitSelectors.push("form");
 
       document.addEventListener("DOMContentLoaded", () => {
         window.Stimulus = Application.start();

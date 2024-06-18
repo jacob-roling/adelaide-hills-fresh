@@ -22,42 +22,58 @@ const orchards = await Promise.all(
       <PortableText value={content[1].content} />
     </section>
 
-    <section class="breakout flex" data-controller="tabs">
+    <h2>Interactive Map</h2>
+    <p class="text-2xl">
+      Click/tap on an <span class="sr-only">apple</span><Icon
+        class="inline"
+        name="noto:red-apple"
+        aria-hidden="true"
+      /> to read more about that orchard.
+    </p>
+
+    <section id="tabs" class="breakout flex border-t" data-controller="tabs">
       <div
-        class="h-full min-h-[500px] grow"
-        id="map"
-        data-controller="map"
-        data-map-lat-value="-34.9032"
-        data-map-lng-value="138.9317"
-        data-map-zoom-value="13"
-        class="aspect-video h-[500px]"
-        data-tabs-target="list"
+        class="bg-neutral-background-subtle w-fit shrink-0 overflow-y-scroll border-r py-8 px-8"
       >
         {
-          orchards.map(({ location: { latitude, longitude } }) => (
-            <button
-              class="button icon"
-              data-tabs-target="tab"
-              data-latitude={latitude}
-              data-longitude={longitude}
+          orchards.map(({ name, content }, i) => (
+            <div
+              data-tabs-target="panel"
+              data-tabs-selected={i == 0 ? "true" : null}
+              class="hidden data-[tabs-selected]:block"
             >
-              <span class="sr-only" />
-              <Icon name="noto:red-apple" aria-hidden="true" />
-            </button>
+              <h3>{name}</h3>
+              <PortableText value={content} />
+            </div>
           ))
         }
       </div>
-
-      <div class="overflow-y-scroll py-8 px-8">
+      <div
+        class="min-h-[500px] grow"
+        id="map"
+        data-controller="map"
+        data-map-latitude-value={orchards[0].location.latitude}
+        data-map-longitude-value={orchards[0].location.longitude}
+        data-map-zoom-value="13"
+        class="aspect-video h-[500px]"
+      >
         {
-          orchards.map(({ name, content }) => (
-            <div
-              data-tabs-target="panel"
-              class="hidden data-[tabs-selected]:block"
+          orchards.map(({ name, location: { latitude, longitude } }) => (
+            <template
+              class="marker"
+              data-latitude={latitude}
+              data-longitude={longitude}
             >
-              <h2>{name}</h2>
-              <PortableText value={content} />
-            </div>
+              {/* <span class="sr-only">{title}</span> */}
+              <span class="text-neutral-solid absolute -translate-x-1/2 translate-y-6 text-center font-bold leading-tight group-aria-selected:underline">
+                {name}
+              </span>
+              <Icon
+                class="absolute -translate-x-1/2 -translate-y-1/2 text-[3rem]"
+                name="noto:red-apple"
+                aria-hidden="true"
+              />
+            </template>
           ))
         }
       </div>
@@ -75,15 +91,37 @@ const orchards = await Promise.all(
         .getElementById("map")
         ?.addEventListener("map:loaded", (event: any) => {
           const map = event.detail;
-          Array.from(
-            document.querySelectorAll("[role='tab']").values(),
-          ).forEach((marker: any) => {
-            L.marker([marker.dataset.latitude, marker.dataset.longitude], {
-              icon: L.divIcon({
-                html: marker.outerHTML,
-              }),
-            }).addTo(map);
-          });
+          Array.from(document.querySelectorAll(".marker").values()).forEach(
+            (markerTemplate: any, i) => {
+              const markerContainer = document.createElement("div");
+              markerContainer.appendChild(
+                markerTemplate.content.cloneNode(true),
+              );
+              const marker = L.marker(
+                [
+                  markerTemplate.dataset.latitude,
+                  markerTemplate.dataset.longitude,
+                ],
+                {
+                  title: "Test",
+                  icon: L.divIcon({
+                    html: markerContainer,
+                  }),
+                },
+              ).addTo(map);
+              if (i == 0) {
+                marker.getElement().setAttribute("aria-selected", "true");
+              }
+              marker.getElement().classList.add("group");
+              marker.getElement().setAttribute("data-tabs-target", "tab");
+              marker.on("click", () => {
+                map.panTo([
+                  markerTemplate.dataset.latitude,
+                  markerTemplate.dataset.longitude,
+                ]);
+              });
+            },
+          );
         });
     });
   </script>

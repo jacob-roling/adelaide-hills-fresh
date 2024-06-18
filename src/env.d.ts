@@ -4,4 +4,5 @@
 
 interface Window {
   Stimulus: import("@hotwired/stimulus").Application;
+  up: import("unpoly");
 }
