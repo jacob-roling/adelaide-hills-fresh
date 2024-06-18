@@ -1,0 +1,43 @@
+---
+import { sanityClient } from "sanity:client";
+import Base from "#layouts/Base.astro";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "#components/SanityImage.astro";
+
+const { title, description, content }: any = await sanityClient.getDocument(
+  `3bd18f71-b38f-4937-9375-1cc183d3b290`,
+);
+---
+
+<Base>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </Fragment>
+
+  <main id="main" class="container typography">
+    <section class="grid grid-cols-3">
+      <div class="pt-header col-span-2 pb-[4em]">
+        <h1>{content[0].heading}</h1>
+        <PortableText value={content[1].content} />
+      </div>
+      <div></div>
+    </section>
+
+    <section class="grid grid-cols-3">
+      <div></div>
+      <div class="col-span-2 py-[4em]">
+        <h2>{content[3].heading}</h2>
+        <PortableText value={content[4].content} />
+      </div>
+    </section>
+
+    <section class="grid grid-cols-3">
+      <div class="col-span-2 py-[4em]">
+        <h2>{content[6].heading}</h2>
+        <PortableText value={content[7].content} />
+      </div>
+      <div></div>
+    </section>
+  </main>
+</Base>

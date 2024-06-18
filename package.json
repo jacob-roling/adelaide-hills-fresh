@@ -47,6 +47,7 @@
     "slugify": "^1.6.6",
     "stimui": "workspace:*",
     "styled-components": "^6.1",
+    "unpoly": "^3.7.3",
     "yt-player": "^3.6.1"
   },
   "devDependencies": {
@@ -54,6 +55,7 @@
     "@tailwindcss/postcss": "4.0.0-alpha.14",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
+    "netlify-cli": "^17.28.0",
     "open-props": "^1.6.11",
     "postcss": "^8.4.33",
     "postcss-custom-media": "^10.0.6",

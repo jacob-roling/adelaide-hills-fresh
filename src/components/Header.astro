@@ -7,7 +7,7 @@ import Logo from "#assets/logo.png";
 <header
   id="header"
   class="bg-neutral-background-subtle container sticky top-0 left-0 z-10 w-full border-b py-2"
-  transition:persist
+  up-keep="true"
 >
   <nav aria-label="primary">
     <ul class="flex items-center">
@@ -60,7 +60,11 @@ import Logo from "#assets/logo.png";
             data-controller="disclosure popover"
             data-popover-placement-value="top-start"
           >
-            <button class="button group" data-disclosure-target="button">
+            <button
+              class="button group"
+              data-disclosure-target="button"
+              data-popover-target="anchor"
+            >
               Our Operation
               <Icon
                 class="transition-transform group-aria-expanded:rotate-180"
@@ -87,11 +91,6 @@ import Logo from "#assets/logo.png";
               <li>
                 <a class="button" href="/our-facility">
                   <span class="grow"> Our Facility </span>
-                </a>
-              </li>
-              <li>
-                <a class="button" href="/quality-assurance">
-                  <span class="grow"> Quality Assurance </span>
                 </a>
               </li>
             </ul>

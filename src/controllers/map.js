@@ -4,14 +4,14 @@ import L from "leaflet";
 export default class Map extends Controller {
   static targets = ["marker"];
   static values = {
-    lat: { type: Number },
-    lng: { type: Number },
+    latitude: { type: Number },
+    longitude: { type: Number },
     zoom: { type: Number, default: 10 },
   };
 
   initialize() {
     this.map = L.map(this.element, {
-      center: [this.latValue, this.lngValue],
+      center: [this.latitudeValue, this.longitudeValue],
       zoom: this.zoomValue,
     });
 
@@ -31,7 +31,7 @@ export default class Map extends Controller {
    */
   markerTargetConnected(element) {
     let marker = L.marker([element.dataset.lat, element.dataset.lon]).addTo(
-      this.map
+      this.map,
     );
   }
 }
