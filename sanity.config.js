@@ -9,6 +9,7 @@ export default defineConfig({
   projectId: "p6snmur3",
   dataset: "production",
   plugins: [structureTool(), unsplashImageAsset()],
+  basePath: "/admin",
   schema: {
     types: schemaTypes,
   },

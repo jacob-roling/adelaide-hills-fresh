@@ -39,7 +39,7 @@ const { title, description, content } = await sanityClient.getDocument(
             alt="Adelaide Hills Fresh Introductory Video Thumbnail"
           />
           <button
-            data-disclosure-target="button"
+            data-disclosure-target="summary"
             class="button icon primary solid stack-center z-1"
             data-action="youtube#play"
           >
@@ -52,10 +52,9 @@ const { title, description, content } = await sanityClient.getDocument(
     </div>
 
     <div
-      data-controller="focus"
-      data-disclosure-target="panel"
+      data-disclosure-target="details"
       class="data-[expanded]:bg-neutral-background/25 invisible fixed inset-0 z-20 hidden bg-transparent transition-all data-[expanded]:visible data-[expanded]:block data-[expanded]:backdrop-blur"
-      data-action="keydown.esc@window->disclosure#close keydown.esc@window->youtube#stop keydown.tab->focus#next"
+      data-action="keydown.esc@window->disclosure#close keydown.esc@window->youtube#stop"
     >
       <div class="flex justify-end">
         <button class="button icon" data-action="disclosure#close youtube#stop">

@@ -6,25 +6,25 @@ import urlForImage from "#utils/urlForImage";
 import { Image } from "astro:assets";
 
 const { title, description, content }: any = await sanityClient.getDocument(
-  `29d5a99e-2a06-4851-8de4-fcbee121c071`
+  `29d5a99e-2a06-4851-8de4-fcbee121c071`,
 );
 ---
 
 <Base>
   <Fragment slot="head">
     <title>{title}</title>
-    <meta name="description" content={description}>
+    <meta name="description" content={description} />
   </Fragment>
 
   <main id="main" class="container typography">
-    <section class="md:flex md:breakout-end gap-16">
-      <div class="pb-[4em] pt-header mr-auto">
+    <section class="md:breakout-end gap-16 md:flex">
+      <div class="pt-header mr-auto pb-[4em]">
         <h1>{content[0].heading}</h1>
         <PortableText value={content[1].content} />
       </div>
       <div>
         <Image
-          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          class="aspect-square h-[400px] w-auto rounded object-cover object-center"
           src={urlForImage(content[2].src).url()}
           alt={content[2].alt}
           inferSize
@@ -32,14 +32,14 @@ const { title, description, content }: any = await sanityClient.getDocument(
       </div>
     </section>
 
-    <section class="md:flex md:breakout-start gap-16">
+    <section class="md:breakout-start gap-16 md:flex">
       <div class="py-[4em] md:order-last">
-        <h1>{content[3].heading}</h1>
+        <h2>{content[3].heading}</h2>
         <PortableText value={content[4].content} />
       </div>
       <div>
         <Image
-          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          class="aspect-square h-[400px] w-auto rounded object-cover object-center"
           src={urlForImage(content[5].src).url()}
           alt={content[5].alt}
           inferSize
@@ -47,14 +47,14 @@ const { title, description, content }: any = await sanityClient.getDocument(
       </div>
     </section>
 
-    <section class="md:flex md:breakout-end gap-16">
-      <div class="py-[4em] mr-auto">
-        <h1>{content[6].heading}</h1>
+    <section class="md:breakout-end gap-16 md:flex">
+      <div class="mr-auto py-[4em]">
+        <h2>{content[6].heading}</h2>
         <PortableText value={content[7].content} />
       </div>
       <div>
         <Image
-          class="rounded w-auto h-[400px] object-center object-cover aspect-square"
+          class="aspect-square h-[400px] w-auto rounded object-cover object-center"
           src={urlForImage(content[8].src).url()}
           alt={content[8].alt}
           inferSize

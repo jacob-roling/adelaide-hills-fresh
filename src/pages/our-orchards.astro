@@ -23,7 +23,7 @@ const orchards = await Promise.all(
     </section>
 
     <h2>Interactive Map</h2>
-    <p class="text-2xl">
+    <p>
       Click/tap on an <span class="sr-only">apple</span><Icon
         class="inline"
         name="noto:red-apple"
@@ -31,10 +31,8 @@ const orchards = await Promise.all(
       /> to read more about that orchard.
     </p>
 
-    <section id="tabs" class="breakout flex border-t" data-controller="tabs">
-      <div
-        class="bg-neutral-background-subtle w-fit shrink-0 overflow-y-scroll border-r py-8 px-8"
-      >
+    <section id="tabs" class="flex" data-controller="tabs">
+      <div class="w-fit shrink-0 overflow-y-scroll border-r py-8 pr-8">
         {
           orchards.map(({ name, content }, i) => (
             <div

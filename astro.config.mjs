@@ -11,7 +11,7 @@ import playformInline from "@playform/inline";
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  site: import.meta.env.SITE,
+  site: "https://adelaidehillsfresh.com.au",
   devToolbar: {
     enabled: false,
   },
@@ -33,4 +33,7 @@ export default defineConfig({
     }),
   ],
   adapter: netlify(),
+  redirects: {
+    "/admin/[...catchall]": "/admin",
+  },
 });
