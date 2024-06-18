@@ -4,17 +4,19 @@ import { Icon } from "astro-icon/components";
 ---
 
 <Base>
-  <main class="px-container py-48">
-    <div class="typography text-center mx-auto w-fit">
-      <p class="text-xl">404</p>
-      <h1 class="text-6xl">
-        Page not found
-      </h1>
-      <p>
-        Sorry, we couldn't find the page you're looking for.
-      </p>
+  <Fragment slot="head">
+    <title>Page Not Found</title>
+  </Fragment>
+
+  <main class="container pt-header typography">
+    <div class="mx-auto w-fit text-center">
+      <div class="hgroup">
+        <p>404</p>
+        <h1>Page Not Found</h1>
+      </div>
+      <p>Sorry, we couldn't find the page you're looking for.</p>
       <a class="inline-flex items-center gap-2" href="/">
-        <Icon name="heroicons:arrow-left" />
+        <Icon name="heroicons:arrow-left" aria-hidden="true" />
         <span>Go back home</span>
       </a>
     </div>
