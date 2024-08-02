@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "netlify dev",
     "astro": "astro"
   },
   "dependencies": {
@@ -58,11 +58,9 @@
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "netlify-cli": "^17.28.0",
-    "open-props": "^1.6.11",
     "postcss": "^8.4.33",
     "postcss-custom-media": "^10.0.6",
     "postcss-import": "^16.1.0",
-    "postcss-jit-props": "^1.0.14",
     "postcss-nesting": "^12.0.2",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-organize-attributes": "^1.0.0",
