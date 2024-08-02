@@ -97,6 +97,24 @@ export default defineType({
           ],
         }),
         defineArrayMember({
+          title: "Carousel",
+          name: "carousel",
+          type: "object",
+          icon: BlockContentIcon,
+          fields: [
+            defineField({
+              type: "array",
+              name: "slides",
+              validation: (Rule) => Rule.required(),
+              of: [
+                defineArrayMember({
+                  type: "imageWithAlt",
+                }),
+              ],
+            }),
+          ],
+        }),
+        defineArrayMember({
           title: "Reference List",
           name: "referenceList",
           type: "object",

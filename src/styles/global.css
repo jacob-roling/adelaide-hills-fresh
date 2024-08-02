@@ -3,9 +3,9 @@
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
 
-@import "@jroling/cleancss/dist/preflight.css" layer(preflight);
-@import "@jroling/cleancss/dist/components.css" layer(components);
-@import "@jroling/cleancss/dist/utilities.css" layer(utilities);
+@import "./preflight.css" layer(preflight);
+@import "./components.css" layer(components);
+@import "./utilities.css" layer(utilities);
 
 @import "./colors.css";
 
@@ -177,6 +177,7 @@
     }
 
     &.outlined {
+      background-color: var(--color-neutral-background-element);
       border-color: var(--color-neutral-border-element);
 
       &:hover {

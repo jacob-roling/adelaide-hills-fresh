@@ -96,16 +96,13 @@ const apples = await sanityClient.fetch(`*[_type == "apple"]`);
                 <td>{title}</td>
                 {Array(12)
                   .fill(0)
-                  .map((_, i) => (
+                  .map((_, i) => i + 1 >= from && i < to ? (
+                    <td class="bg-primary-solid">
+                      <span class="sr-only">Available</span>
+                    </td>
+                  ) : (
                     <td>
-                      <Fragment>
-                        <Icon
-                          class="mx-auto"
-                          name={`heroicons:${i + 1 >= from && i < to ? "check" : "x-mark"}`}
-                          aria-hidden="true"
-                        />
-                        <span class="sr-only">{`${i + 1 >= from && i < to ? "Available" : "Not available"}`}</span>
-                      </Fragment>
+                      <span class="sr-only">Not Available</span>
                     </td>
                   ))}
               </tr>
