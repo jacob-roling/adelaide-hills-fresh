@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
-import { ref, effect } from "@vue/reactivity";
-import { useFocus, useID } from "./utils";
+import { Signal } from "signal-polyfill";
+import useID from "#utils/useID";
+import effect from "#utils/effect";
 
 export default class extends Controller {
   static targets = ["list", "tab", "panel"];
@@ -12,15 +13,15 @@ export default class extends Controller {
   initialize() {
     this.abortController = new AbortController();
     this.id = useID();
-    this.selected = ref(null);
+    this.selected = new Signal.State(null);
     this.tabsConnected = 0;
     this.panelsConnected = 0;
     this.animationTimer;
 
     this.dispose = effect(() => {
-      if (this.selected.value) {
+      if (this.selected.get()) {
         this.tabTargets.forEach((tab) => {
-          if (tab.getAttribute("aria-controls") === this.selected.value) {
+          if (tab.getAttribute("aria-controls") === this.selected.get()) {
             tab.setAttribute("aria-selected", "true");
             tab.removeAttribute("tabindex");
             // this.moveIndicator(tab);
@@ -31,7 +32,7 @@ export default class extends Controller {
         });
 
         this.panelTargets.forEach((panel) => {
-          if (panel.id === this.selected.value) {
+          if (panel.id === this.selected.get()) {
             panel.setAttribute("data-tabs-selected", "true");
           } else {
             panel.removeAttribute("data-tabs-selected");
@@ -42,7 +43,7 @@ export default class extends Controller {
   }
 
   select(target) {
-    this.selected.value = target.getAttribute("aria-controls");
+    this.selected.set(target.getAttribute("aria-controls"));
   }
 
   keydown(event) {
@@ -122,13 +123,13 @@ export default class extends Controller {
     panel.setAttribute("tabindex", "0");
     panel.setAttribute(
       "aria-labelledby",
-      this.id(`tab-${this.panelsConnected}`)
+      this.id(`tab-${this.panelsConnected}`),
     );
     if (
       panel.hasAttribute("data-tabs-selected") &&
       panel.getAttribute("data-tabs-selected") !== "false"
     ) {
-      this.selected.value = panel.id;
+      this.selected.set(panel.id);
     }
     this.panelsConnected++;
   }

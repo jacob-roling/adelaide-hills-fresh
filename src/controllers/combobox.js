@@ -51,13 +51,13 @@ export default class Combobox extends Controller {
           event.preventDefault();
           if (this.activeDescendant.previousElementSibling) {
             this.setActiveDescendant(
-              this.activeDescendant.previousElementSibling
+              this.activeDescendant.previousElementSibling,
             );
           } else {
             this.setActiveDescendant(
               this.listboxTarget.children[
                 this.listboxTarget.children.length - 1
-              ]
+              ],
             );
           }
 
