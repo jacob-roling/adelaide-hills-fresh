@@ -19,11 +19,11 @@ export default class extends Controller {
     const popoverStyle = getComputedStyle(this.popoverTarget);
 
     const offsetValue = parseInt(
-      popoverStyle.getPropertyValue("--popover-offset")
+      popoverStyle.getPropertyValue("--popover-offset"),
     );
 
     const paddingValue = parseInt(
-      popoverStyle.getPropertyValue("--popover-padding")
+      popoverStyle.getPropertyValue("--popover-padding"),
     );
 
     this.cleanup = autoUpdate(this.anchorTarget, this.popoverTarget, () => {

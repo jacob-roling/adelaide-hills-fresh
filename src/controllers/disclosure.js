@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { useID } from "./utils";
+import useID from "#utils/useID";
 
 export default class Disclosure extends Controller {
   static targets = ["summary", "details"];
