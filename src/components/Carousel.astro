@@ -1,0 +1,55 @@
+---
+const { slides } = Astro.props;
+import { Icon } from "astro-icon/components";
+---
+
+<div data-controller="carousel" class="glide relative h-[200px] !w-[300px]">
+  <div class="glide__track h-full" data-glide-el="track">
+    <ul class="glide__slides">
+      {
+      slides.map((_, i) => (
+          <li class="glide__slide">
+            <img
+              draggable="false"
+              class="h-full w-full object-cover"
+              src={`https://picsum.photos/seed/${i + 1}/200/300`}
+              alt="Test"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div
+    class="glide__arrows stack-layout pointer-events-none absolute inset-0"
+    data-glide-el="controls"
+  >
+    <button
+      class="button icon stack-left stack-center pointer-events-auto"
+      data-glide-dir="<"
+    >
+      <Icon name="heroicons:arrow-left" aria-hidden="true" />
+      <span class="sr-only">Previous</span>
+    </button>
+    <button
+      class="button icon stack-right stack-center pointer-events-auto"
+      data-glide-dir=">"
+    >
+      <Icon name="heroicons:arrow-right" aria-hidden="true" />
+      <span class="sr-only">Next</span>
+    </button>
+  </div>
+  <div
+    class="glide__bullets pointer-events-none absolute bottom-0"
+    data-glide-el="controls[nav]"
+  >
+    {
+    slides.map((_, i) => (
+        <button
+          class="glide__bullet stack-center pointer-events-auto"
+          data-glide-dir={`=${i}`}
+        />
+      ))
+    }
+  </div>
+</div>

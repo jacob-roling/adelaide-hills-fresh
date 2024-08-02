@@ -37,6 +37,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script>
       import { Application } from "@hotwired/stimulus";
       import { registerComponents } from "stimui";
+      import Map from "#controllers/map";
+      import Carousel from "#controllers/carousel";
       import "unpoly";
 
       window.up.log.disable();
@@ -47,11 +49,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       window.up.form.config.submitSelectors.push("form");
 
-      document.addEventListener("DOMContentLoaded", () => {
-        window.Stimulus = Application.start();
-        registerComponents(window.Stimulus);
-        document.dispatchEvent(new Event("stimulus:loaded"));
-      });
+      window.Stimulus = Application.start();
+      registerComponents(window.Stimulus);
+      window.Stimulus.register("map", Map);
+      window.Stimulus.register("carousel", Carousel);
+      document.dispatchEvent(new Event("stimulus:loaded"));
     </script>
   </body>
 </html>

@@ -58,7 +58,7 @@ const orchards = await Promise.all(
         {
           orchards.map(({ name, location: { latitude, longitude } }) => (
             <template
-              class="marker"
+              data-map-target="marker"
               data-latitude={latitude}
               data-longitude={longitude}
             >
@@ -77,52 +77,6 @@ const orchards = await Promise.all(
       </div>
     </section>
   </main>
-
-  <script>
-    import Map from "#controllers/map";
-    import L from "leaflet";
-
-    document.addEventListener("stimulus:loaded", () => {
-      window.Stimulus.register("map", Map);
-
-      document
-        .getElementById("map")
-        ?.addEventListener("map:loaded", (event: any) => {
-          const map = event.detail;
-          Array.from(document.querySelectorAll(".marker").values()).forEach(
-            (markerTemplate: any, i) => {
-              const markerContainer = document.createElement("div");
-              markerContainer.appendChild(
-                markerTemplate.content.cloneNode(true),
-              );
-              const marker = L.marker(
-                [
-                  markerTemplate.dataset.latitude,
-                  markerTemplate.dataset.longitude,
-                ],
-                {
-                  title: "Test",
-                  icon: L.divIcon({
-                    html: markerContainer,
-                  }),
-                },
-              ).addTo(map);
-              if (i == 0) {
-                marker.getElement().setAttribute("aria-selected", "true");
-              }
-              marker.getElement().classList.add("group");
-              marker.getElement().setAttribute("data-tabs-target", "tab");
-              marker.on("click", () => {
-                map.panTo([
-                  markerTemplate.dataset.latitude,
-                  markerTemplate.dataset.longitude,
-                ]);
-              });
-            },
-          );
-        });
-    });
-  </script>
 
   <style is:global>
     .leaflet-container {
