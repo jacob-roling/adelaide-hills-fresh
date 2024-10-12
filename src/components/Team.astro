@@ -1,12 +1,12 @@
 ---
-import urlForImage from "@utils/urlForImage";
+import urlForImage from "#utils/urlForImage";
 import { PortableText } from "astro-portabletext";
 import { Image } from "astro:assets";
 
 const { heading, content, members } = Astro.props;
 ---
 
-<section class="bg-[var(--color-2)] secondary">
+<section class="secondary bg-[var(--color-2)]">
   <div
     class="container grid grid-cols-1 gap-x-16 gap-y-16 px-6 lg:px-8 xl:grid-cols-3"
   >
@@ -18,7 +18,7 @@ const { heading, content, members } = Astro.props;
 
     <ul
       role="list"
-      class="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none xl:col-span-2 list-none"
+      class="grid list-none grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none xl:col-span-2"
     >
       {
         members.map(({ firstName, lastName, image, role, description }) => (

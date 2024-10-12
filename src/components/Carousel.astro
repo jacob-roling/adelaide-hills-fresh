@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 <div data-controller="carousel" class="glide relative h-[200px] !w-[300px]">
   <div class="glide__track h-full" data-glide-el="track">
     <ul class="glide__slides">
-      {
+      <!-- {
         slides.map((_, i) => (
           <li class="glide__slide">
             <img
@@ -17,7 +17,7 @@ import { Icon } from "astro-icon/components";
             />
           </li>
         ))
-      }
+      } -->
     </ul>
   </div>
   <div
@@ -43,13 +43,13 @@ import { Icon } from "astro-icon/components";
     class="glide__bullets pointer-events-none absolute bottom-0"
     data-glide-el="controls[nav]"
   >
-    {
+    <!-- {
       slides.map((_, i) => (
         <button
           class="glide__bullet stack-center pointer-events-auto"
           data-glide-dir={`=${i}`}
         />
       ))
-    }
+    } -->
   </div>
 </div>

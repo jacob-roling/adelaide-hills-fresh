@@ -2,7 +2,8 @@
 import Base from "#layouts/Base.astro";
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
-import SanityImage from "#components/SanityImage.astro";
+import urlForImage from "#utils/urlForImage";
+import { Image } from "astro:assets";
 
 const { title, description, content }: any = await sanityClient.getDocument(
   "72652ee3-cca1-437f-bdda-f1887f3d43f3",
@@ -26,13 +27,13 @@ const team = await Promise.all(
         <PortableText value={content[1].content} />
       </div>
       <div>
-        <SanityImage
+        <!-- <SanityImage
           class="aspect-square h-[400px] w-full rounded object-cover object-center sm:w-auto"
           src={content[2].src}
           alt={content[2].alt}
           loading="eager"
           inferSize
-        />
+        /> -->
       </div>
     </div>
 
@@ -53,11 +54,11 @@ const team = await Promise.all(
       </dl>
     </div>
 
-    <SanityImage
+    <!-- <SanityImage
       class="aspect-[4/3] h-[400px] w-full rounded object-cover object-center"
       src={content[6].src}
       alt={content[6].alt}
-    />
+    /> -->
 
     <section class="py-[4em] md:flex md:gap-16">
       <div class="shrink-0">
@@ -68,10 +69,11 @@ const team = await Promise.all(
         {
           team.map(({ firstName, lastName, image, role, description }) => (
             <li>
-              <SanityImage
-                class="mb-2 aspect-square rounded object-cover object-center"
-                src={image.src}
+              <Image
+                class="mb-4 aspect-square rounded object-cover object-center"
+                src={urlForImage(image.src).url()}
                 alt={image.alt}
+                inferSize
               />
               <div class="hgroup">
                 <h3>

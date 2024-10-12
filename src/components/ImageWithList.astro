@@ -1,5 +1,5 @@
 ---
-import urlForImage from "@utils/urlForImage";
+import urlForImage from "#utils/urlForImage";
 import { PortableText } from "astro-portabletext";
 import { Icon } from "astro-icon/components";
 
@@ -25,7 +25,7 @@ const { heading, content, image, list } = Astro.props;
       <div class="w-full lg:max-w-xl lg:flex-auto">
         <h3 class="sr-only">Job Openings</h3>
         <ul
-          class="-my-8 divide-y divide-[var(--color-6)] list-none pl-0"
+          class="-my-8 list-none divide-y divide-[var(--color-6)] pl-0"
           role="list"
         >
           {

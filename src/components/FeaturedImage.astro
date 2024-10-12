@@ -1,11 +1,11 @@
 ---
-import urlForImage from "@utils/urlForImage";
+import urlForImage from "#utils/urlForImage";
 import { Image } from "astro:assets";
 
 const { alt } = Astro.props;
 ---
 
-<section class="bg-[var(--color-2)] secondary">
+<section class="secondary bg-[var(--color-2)]">
   <div class="container hidden lg:block">
     <picture>
       <source
@@ -32,7 +32,7 @@ const { alt } = Astro.props;
         class={Astro.props.class ??
           "h-[300px] object-center object-cover w-full aspect-[3/2]"}
         src={urlForImage(Astro.props).height(300).format("jpg").url()}
-        alt={alt}
+        {alt}
         height="300"
         width="0"
       />
