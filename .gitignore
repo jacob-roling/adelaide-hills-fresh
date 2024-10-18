@@ -25,4 +25,12 @@ pnpm-debug.log*
 # Local Netlify folder
 .netlify
 
+.direnv# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
 .direnv
+
+# pre-commit
+.pre-commit-config.yaml
