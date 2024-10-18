@@ -5,8 +5,9 @@ import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
 import icon from "astro-icon";
-import playformCompress from "@playform/compress";
-import playformInline from "@playform/inline";
+import browserslist from 'browserslist';
+import { browserslistToTargets } from 'lightningcss';
+import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,12 +28,23 @@ export default defineConfig({
     }),
     react(),
     icon(),
-    playformInline(),
-    playformCompress({
-      CSS: false,
-    }),
   ],
   adapter: netlify({
     imageCDN: false,
   }),
+    vite: {
+    css: {
+      transformer: 'lightningcss',
+      lightningcss: {
+        targets: browserslistToTargets(browserslist('>= 0.25%')),
+        drafts: {
+          customMedia: true
+        }
+      }
+    },
+    build: {
+      cssMinify: 'lightningcss'
+    },
+    plugins: [tailwindcss()]
+  }
 });

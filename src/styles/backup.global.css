@@ -1,0 +1,261 @@
+@layer preflight, components, theme, utilities;
+
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+@import "./preflight.css" layer(preflight);
+@import "./components.css" layer(components);
+@import "./utilities.css" layer(utilities);
+
+@import "./colors.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+@custom-media --sm (min-width: 640px);
+@custom-media --md (min-width: 768px);
+@custom-media --lg (min-width: 1024px);
+@custom-media --xl (min-width: 1280px);
+@custom-media --2xl (min-width: 1536px);
+
+@theme {
+  --spacing-header: var(--spacing-header);
+  --shadow: none;
+  --radius: 0.25rem;
+  --radius-container: 0.5rem;
+  --default-font-family: "Source Sans 3", Inter, Roboto, "Helvetica Neue",
+    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  --tw-divide-y-reverse: 0;
+}
+
+@layer theme {
+  :root {
+    color-scheme: light dark;
+
+    --spacing-header: 4rem;
+
+    accent-color: var(--color-primary-solid);
+
+    --outline-width: 2px;
+    --outline-offset: 2px;
+    --outline-color: var(--color-primary-solid);
+    --outline-style: solid;
+
+    --popover-offset: 0;
+    --popover-padding: 16;
+
+    --tw-outline-style: var(--outline-style);
+
+    --border-width: 1px;
+    --border-style: solid;
+
+    --tw-border-style: var(--border-style);
+
+    color: var(--color-neutral-text);
+    background-color: var(--color-neutral-background);
+    border-color: var(--color-neutral-border);
+
+    scrollbar-color: var(--color-neutral-text) var(--color-neutral-background);
+    scrollbar-gutter: stable both-edges;
+  }
+}
+
+@layer theme {
+  .outline {
+    outline-color: var(--color-primary-solid);
+  }
+
+  h1,
+  h2,
+  h3,
+  hgroup > p {
+    color: var(--color-neutral-text-high-contrast);
+  }
+
+  .typography {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Libre Baskerville", serif;
+    }
+
+    a {
+      color: var(--color-neutral-text-high-contrast);
+      text-decoration-color: var(--color-neutral-border-element);
+
+      &:hover,
+      &[aria-current],
+      &:focus-visible {
+        text-decoration-color: var(--color-neutral-text-high-contrast);
+      }
+    }
+
+    thead {
+      th {
+        background-color: var(--color-neutral-background-element);
+        color: var(--color-neutral-text-high-contrast);
+      }
+    }
+
+    tr {
+      td {
+        background-color: var(--color-neutral-background);
+      }
+
+      &:nth-child(even) {
+        td {
+          background-color: var(--color-neutral-background-subtle);
+        }
+      }
+    }
+
+    dt {
+      color: var(--color-neutral-text-high-contrast);
+      font-weight: 500;
+    }
+  }
+
+  label {
+    color: var(--color-neutral-text-high-contrast);
+  }
+
+  ::selection,
+  mark {
+    color: var(--color-primary-text-solid-contrast);
+    background-color: var(--color-primary-solid);
+  }
+
+  input,
+  select {
+    color: var(--color-neutral-text-high-contrast);
+    background-color: var(--color-neutral-background-element);
+    border-color: var(--color-neutral-border-element);
+  }
+
+  .badge {
+    color: var(--color-neutral-text-high-contrast);
+    background-color: var(--color-neutral-background-element);
+
+    &.kbd {
+      border-top-width: calc(var(--border-width) + 1px);
+    }
+  }
+
+  .container {
+    @media (--xl) {
+      --_width: 1024px;
+    }
+  }
+
+  .card {
+    background-color: var(--color-neutral-background-subtle);
+
+    &:focus-within {
+      outline-color: var(--outline-color);
+    }
+  }
+
+  .button {
+    color: var(--color-neutral-text-high-contrast);
+
+    &[aria-current="page"] {
+      background-color: var(--color-neutral-hover);
+    }
+
+    > .badge {
+      border-color: var(--color-neutral-border-element);
+    }
+
+    &:hover {
+      background-color: var(--color-neutral-hover);
+
+      > .badge {
+        background-color: var(--color-neutral-hover);
+      }
+    }
+
+    &.outlined {
+      background-color: var(--color-neutral-background-element);
+      border-color: var(--color-neutral-border-element);
+
+      &:hover {
+        background-color: var(--color-neutral-hover);
+        border-color: var(--color-neutral-border-hover);
+      }
+    }
+
+    &.solid {
+      background-color: var(--color-neutral-solid);
+      border-color: var(--color-neutral-solid);
+      color: var(--color-neutral-text-solid-contrast);
+
+      border-left-color: var(--color-neutral-border-element);
+      border-top-color: var(--color-neutral-border-element);
+
+      &:hover {
+        background-color: var(--color-neutral-solid-hover);
+      }
+    }
+
+    &.primary {
+      color: var(--color-primary-text-high-contrast);
+
+      &[aria-current="page"] {
+        background-color: var(--color-primary-hover);
+      }
+
+      > .badge {
+        border-color: var(--color-primary-border-element);
+      }
+
+      &:hover {
+        background-color: var(--color-primary-hover);
+
+        > .badge {
+          background-color: var(--color-primary-hover);
+        }
+      }
+
+      &.solid {
+        background-color: var(--color-primary-solid);
+        border-color: var(--color-primary-solid);
+        color: var(--color-primary-text-solid-contrast);
+
+        border-left-color: var(--color-primary-solid-hover);
+        border-top-color: var(--color-primary-solid-hover);
+
+        &:hover {
+          background-color: var(--color-primary-solid-hover);
+        }
+      }
+
+      &.outlined {
+        background-color: var(--color-primary-background-element);
+        border-color: var(--color-primary-border-element);
+
+        &:hover {
+          background-color: var(--color-primary-hover);
+          border-color: var(--color-primary-border-hover);
+        }
+      }
+    }
+
+    &.warning {
+      &.outlined {
+        border-color: var(--color-warning-border-element);
+
+        &:hover {
+          background-color: var(--color-warning-hover);
+          border-color: var(--color-warning-border-hover);
+        }
+      }
+    }
+  }
+
+  [data-icon] {
+    font-size: 1.125em;
+    line-height: 1;
+  }
+}

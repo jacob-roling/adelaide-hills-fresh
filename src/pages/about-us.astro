@@ -9,9 +9,11 @@ const { title, description, content }: any = await sanityClient.getDocument(
   "72652ee3-cca1-437f-bdda-f1887f3d43f3",
 );
 
-const team = await Promise.all(
-  content[9].list.map(async ({ _ref }) => await sanityClient.getDocument(_ref)),
-);
+console.log(content)
+
+// const team = await Promise.all(
+//   content[9].list.map(async ({ _ref }) => await sanityClient.getDocument(_ref)),
+// );
 ---
 
 <Base>
@@ -20,24 +22,17 @@ const team = await Promise.all(
     <meta name="description" content={description} />
   </Fragment>
 
-  <main id="main" class="container typography">
-    <div class="gap-16 sm:flex">
-      <div class="pt-header pb-[4em] sm:order-last">
+  <main id="main" class="container prose">
+    <section class="pb-16 sm:flex">
+      <div class="pt-16 sm:order-last">
         <h1>{content[0].heading}</h1>
         <PortableText value={content[1].content} />
       </div>
       <div>
-        <!-- <SanityImage
-          class="aspect-square h-[400px] w-full rounded object-cover object-center sm:w-auto"
-          src={content[2].src}
-          alt={content[2].alt}
-          loading="eager"
-          inferSize
-        /> -->
       </div>
-    </div>
+    </section>
 
-    <div class="gap-8 py-[4em] sm:flex">
+    <!-- <div class="gap-8 py-[4em] sm:flex">
       <div class="grow">
         <h2>{content[3].heading}</h2>
         <PortableText value={content[4].content} />
@@ -52,15 +47,10 @@ const team = await Promise.all(
           ))
         }
       </dl>
-    </div>
+    </div> -->
 
-    <!-- <SanityImage
-      class="aspect-[4/3] h-[400px] w-full rounded object-cover object-center"
-      src={content[6].src}
-      alt={content[6].alt}
-    /> -->
 
-    <section class="py-[4em] md:flex md:gap-16">
+    <!-- <section class="py-[4em] md:flex md:gap-16">
       <div class="shrink-0">
         <h2>{content[7].heading}</h2>
         <PortableText value={content[8].content} />
@@ -85,7 +75,7 @@ const team = await Promise.all(
             </li>
           ))
         }
-      </ul>
+      </ul> -->
     </section>
   </main>
 </Base>
