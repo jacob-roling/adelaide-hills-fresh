@@ -49,6 +49,8 @@
   --color-primary-10: #dc3b5d;
   --color-primary-11: #ca244d;
   --color-primary-12: #64172b;
+
+  /* --size-prose: 20ch; */
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -177,7 +179,7 @@
 @layer base {
   body {
     line-height: 1.5;
-    
+
     @media (--min-w-xl) {
       font-size: 18px;
     }
@@ -518,17 +520,22 @@
     :is(h1, h2, h3, h4, h5, h6) {
       text-wrap: balance;
       margin-bottom: 0.65em;
+      color: var(--color-neutral-12);
+      font-family: var(--font-family-display);
     }
 
     h1 {
       font-size: 4rem;
       font-weight: 700;
-      color: var(--color-neutral-12);
     }
 
     h2 {
       font-size: 2rem;
       font-weight: 700;
+    }
+
+    h3 {
+      font-weight: 600;
     }
 
     p {
@@ -547,6 +554,15 @@
     :is(p, li, h1, h2, h3, h4, h5, h6) {
       overflow-wrap: break-word;
       hyphens: auto;
+    }
+
+    dd {
+      margin-bottom: 1em;
+    }
+
+    dt {
+      color: var(--color-neutral-12);
+      font-weight: 600;
     }
   }
 }

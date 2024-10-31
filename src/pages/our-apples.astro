@@ -20,44 +20,38 @@ const apples = await sanityClient.fetch(`*[_type == "apple"]`);
     <meta name="description" content={description} />
   </Fragment>
 
-  <main id="main" class="typography container">
-    <div class="pt-header">
+  <main id="main" class="container">
+    <section class="prose py-32">
       <div>
         <h1>{content[0].heading}</h1>
         <PortableText value={content[1].content} />
       </div>
-    </div>
+    </section>
 
-    <ul
-      class="m-0 grid max-w-full grid-cols-1 gap-8 sm:grid-cols-3"
-      role="list"
-    >
-      <li
-        class="grid-cols-1 grid-cols-2 gap-8 sm:col-span-3 sm:grid"
-        role="listitem"
-      >
+    <ul class="prose m-0 grid max-w-full grid-cols-1 gap-16 sm:grid-cols-3">
+      <li class="flex gap-16 sm:col-span-3">
         <Image
           class="aspect-square h-auto w-full rounded object-cover object-center sm:order-last"
           src={urlForImage(apples[0].image.src).url()}
           alt={apples[0].image.alt}
           inferSize
         />
-        <div>
+        <div class="grow">
           <h2 class="mt-[1em] sm:mt-0">{apples[0].title}</h2>
           <p>{apples[0].description}</p>
         </div>
       </li>
       {
         apples.slice(1).map(({ title, image, description }) => (
-          <li role="listitem">
+          <li>
             <Image
               class="aspect-square h-auto w-full rounded object-cover object-center"
               src={urlForImage(image.src).url()}
               alt={image.alt}
               inferSize
             />
-            <h2>{title}</h2>
-            <p>{description}</p>
+            <h2 class="mt-6">{title}</h2>
+            <p class="mt-0">{description}</p>
           </li>
         ))
       }
@@ -96,15 +90,17 @@ const apples = await sanityClient.fetch(`*[_type == "apple"]`);
                 <td>{title}</td>
                 {Array(12)
                   .fill(0)
-                  .map((_, i) => i + 1 >= from && i < to ? (
-                    <td class="bg-primary-solid">
-                      <span class="sr-only">Available</span>
-                    </td>
-                  ) : (
-                    <td>
-                      <span class="sr-only">Not Available</span>
-                    </td>
-                  ))}
+                  .map((_, i) =>
+                    i + 1 >= from && i < to ? (
+                      <td class="bg-primary-9">
+                        <span class="sr-only">Available</span>
+                      </td>
+                    ) : (
+                      <td>
+                        <span class="sr-only">Not Available</span>
+                      </td>
+                    ),
+                  )}
               </tr>
             ))
           }

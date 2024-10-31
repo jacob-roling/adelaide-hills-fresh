@@ -9,11 +9,9 @@ const { title, description, content }: any = await sanityClient.getDocument(
   "72652ee3-cca1-437f-bdda-f1887f3d43f3",
 );
 
-console.log(content)
-
-// const team = await Promise.all(
-//   content[9].list.map(async ({ _ref }) => await sanityClient.getDocument(_ref)),
-// );
+const team = await Promise.all(
+  content[9].list.map(async ({ _ref }) => await sanityClient.getDocument(_ref)),
+);
 ---
 
 <Base>
@@ -23,44 +21,62 @@ console.log(content)
   </Fragment>
 
   <main id="main" class="container prose">
-    <section class="pb-16 sm:flex">
-      <div class="pt-16 sm:order-last">
+    <section class="gap-16 lg:flex xl:gap-32">
+      <div class="grow py-16 sm:order-last">
         <h1>{content[0].heading}</h1>
         <PortableText value={content[1].content} />
       </div>
       <div>
+        <Image
+          class="h-[500px] min-h-full rounded object-cover object-center"
+          src={urlForImage(content[2].src).url()}
+          alt={content[2].alt}
+          inferSize
+        />
       </div>
     </section>
 
-    <!-- <div class="gap-8 py-[4em] sm:flex">
+    <section class="container prose gap-16 py-32 md:flex">
       <div class="grow">
-        <h2>{content[3].heading}</h2>
-        <PortableText value={content[4].content} />
+        <div class="max-w-prose">
+          <h2>{content[3].heading}</h2>
+          <PortableText value={content[4].content} />
+        </div>
       </div>
-      <dl>
+      <dl class="mt-16 md:mt-0">
         {
           content[5].list.map(({ title, description }) => (
             <Fragment>
               <dt class="text-4xl">{title}</dt>
-              <dd class="mb-4">{description}</dd>
+              <dd>{description}</dd>
             </Fragment>
           ))
         }
       </dl>
-    </div> -->
+    </section>
 
+    <div class="container hidden md:block">
+      <Image
+        class="aspect-video h-[400px] rounded object-cover object-center"
+        src={urlForImage(content[6].src).url()}
+        alt={content[6].alt}
+        inferSize
+      />
+    </div>
 
-    <!-- <section class="py-[4em] md:flex md:gap-16">
-      <div class="shrink-0">
+    <section class="py-32 md:flex md:gap-16">
+      <div class="mb-16 shrink-0">
         <h2>{content[7].heading}</h2>
         <PortableText value={content[8].content} />
       </div>
-      <ul class="m-0 ml-auto grow gap-8 sm:grid sm:grid-cols-2">
+      <ul
+        class="mt-16 ml-auto max-w-4xl grow grid-cols-2 gap-8 sm:mt-0 sm:grid"
+      >
         {
           team.map(({ firstName, lastName, image, role, description }) => (
             <li>
               <Image
-                class="mb-4 aspect-square rounded object-cover object-center"
+                class="mb-4 aspect-square w-full rounded object-cover object-center"
                 src={urlForImage(image.src).url()}
                 alt={image.alt}
                 inferSize
@@ -69,13 +85,13 @@ console.log(content)
                 <h3>
                   {firstName} {lastName}
                 </h3>
-                <p>{role}</p>
+                <p class="mt-0">{role}</p>
               </div>
               <p>{description}</p>
             </li>
           ))
         }
-      </ul> -->
+      </ul>
     </section>
   </main>
 </Base>
