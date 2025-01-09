@@ -1,6 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { schemaTypes } from "./src/schema";
+import { schemaTypes } from "./schema";
 import {
   singletonTools,
   singletonDocumentListItem,

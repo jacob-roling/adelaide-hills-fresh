@@ -12,10 +12,9 @@ export default defineStackbitConfig({
       contentDirs: ["src/content"],
       models,
       assetsConfig: {
-        referenceType: "static",
-        staticDir: "public",
-        uploadDir: "uploads",
-        publicPath: "/",
+        referenceType: "relative",
+        assetsDir: "src/assets",
+        uploadDir: "uploads"
       },
     }),
   ],

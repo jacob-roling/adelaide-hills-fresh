@@ -3,11 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "netlify dev",
-    "astro": "astro"
+    "dev": "pnpm run \"/^dev:.*/\"",
+    "dev:astro": "astro dev",
+    "dev:stackbit": "stackbit dev",
+    "build": "astro build"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.0.1",

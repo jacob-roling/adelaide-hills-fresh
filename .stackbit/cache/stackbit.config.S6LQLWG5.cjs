@@ -155,10 +155,9 @@ var stackbit_config_default = (0, import_types.defineStackbitConfig)({
       contentDirs: ["src/content"],
       models,
       assetsConfig: {
-        referenceType: "static",
-        staticDir: "public",
-        uploadDir: "uploads",
-        publicPath: "/"
+        referenceType: "relative",
+        assetsDir: "src/assets",
+        uploadDir: "uploads"
       }
     })
   ],
@@ -176,4 +175,4 @@ var stackbit_config_default = (0, import_types.defineStackbitConfig)({
     }
   }
 });
-//# sourceMappingURL=stackbit.config.QZIUP7VX.cjs.map
+//# sourceMappingURL=stackbit.config.S6LQLWG5.cjs.map

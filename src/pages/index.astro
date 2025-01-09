@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 import Base from "#layouts/Base.astro";
-import * as homePage from '#content/home.md';
+import * as homePage from "#content/home.md";
 
 const { title, description, headline } = homePage.frontmatter;
 ---
@@ -14,7 +14,9 @@ const { title, description, headline } = homePage.frontmatter;
 
   <main id="main" class="container" data-sb-object-id="src/content/home.md">
     <section class="pt-header pb-[4em]">
-      <h1 class="font-display font-bold text-6xl" data-sb-field-path="headline">{headline}</h1>
+      <h1 class="font-display text-6xl font-bold" data-sb-field-path="headline">
+        {headline}
+      </h1>
     </section>
   </main>
 </Base>

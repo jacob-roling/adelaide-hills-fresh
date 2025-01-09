@@ -33,19 +33,32 @@ const { title, description, publishedDate, updatedDate } = post.data;
   <main id="main" class="container">
     <article data-sb-object-id={`src/content/posts/${post.id}.md`}>
       <header class="pt-header">
-        <div class="border-s border-neutral-6 ps-6">
+        <div class="border-neutral-6 border-s ps-6">
           <p class="text-neutral-11">
-            Published <Time data-controller="datetime" datetime={publishedDate.toISOString()} data-sb-field-path="publishedDate" />
+            Published <Time
+              data-controller="datetime"
+              datetime={publishedDate.toISOString()}
+              data-sb-field-path="publishedDate"
+            />
           </p>
           <p class="text-neutral-11">
-            Last updated <Time data-controller="datetime" datetime={updatedDate.toISOString()} data-sb-field-path="updatedDate" />
+            Last updated <Time
+              data-controller="datetime"
+              datetime={updatedDate.toISOString()}
+              data-sb-field-path="updatedDate"
+            />
           </p>
         </div>
 
-        <h1 class="mt-6 font-display font-bold text-5xl" data-sb-field-path="title">{title}</h1>
+        <h1
+          class="font-display mt-6 text-5xl font-bold"
+          data-sb-field-path="title"
+        >
+          {title}
+        </h1>
       </header>
 
-      <div class="typography" data-sb-field-path="body">
+      <div class="typography" data-sb-field-path="markdown_content">
         <Content />
       </div>
     </article>

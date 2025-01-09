@@ -1,14 +1,10 @@
 ---
 import Base from "#layouts/Base.astro";
-import { sanityClient } from "sanity:client";
 import "@glidejs/glide/dist/css/glide.core.css";
 import { Icon } from "astro-icon/components";
 import Carousel from "#components/Carousel.astro";
 
 // @ts-ignore
-const { title, description, content } = await sanityClient.getDocument(
-  "ddc70fd0-ec66-4f3e-9ffa-046a1183f1e1",
-);
 ---
 
 <Base>

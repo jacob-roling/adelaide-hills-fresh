@@ -5,13 +5,5 @@
     "prettier-plugin-tailwindcss"
   ],
   "astroAllowShorthand": true,
-  "attributeGroups": ["$CODE_GUIDE"],
-  "overrides": [
-    {
-      "files": "*.astro",
-      "options": {
-        "parser": "astro"
-      }
-    }
-  ]
+  "attributeGroups": ["$CODE_GUIDE"]
 }
