@@ -6,7 +6,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en-AU" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -21,37 +21,35 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot name="head" />
   </head>
   <body class="bg-neutral-1 text-neutral-12">
-    <!-- <Header /> -->
+    <Header />
 
     <slot />
 
-    <!-- <VisualEditing enabled={true} zIndex={1000} /> -->
-
-    <!-- <Footer /> -->
-
     <script>
       import { Application } from "@hotwired/stimulus";
-      import Map from "#controllers/map";
-      import Carousel from "#controllers/carousel";
-      import Disclosure from "#controllers/disclosure";
-      import Tabs from "#controllers/tabs";
-      import Popover from "#controllers/popover";
-      import "unpoly";
+      import DateTime from "#controllers/datetime";
+      // import Map from "#controllers/map";
+      // import Carousel from "#controllers/carousel";
+      // import Disclosure from "#controllers/disclosure";
+      // import Tabs from "#controllers/tabs";
+      // import Popover from "#controllers/popover";
+      // import "unpoly";
 
-      window.up.log.disable();
+      // window.up.log.disable();
 
-      window.up.link.config.followSelectors.push("a[href]");
-      window.up.link.config.instantSelectors.push("a[href]");
-      window.up.link.config.preloadSelectors.push("a[href]");
+      // window.up.link.config.followSelectors.push("a[href]");
+      // window.up.link.config.instantSelectors.push("a[href]");
+      // window.up.link.config.preloadSelectors.push("a[href]");
 
-      window.up.form.config.submitSelectors.push("form");
+      // window.up.form.config.submitSelectors.push("form");
 
       window.Stimulus = Application.start();
-      window.Stimulus.register("map", Map);
-      window.Stimulus.register("carousel", Carousel);
-      window.Stimulus.register("disclosure", Disclosure);
-      window.Stimulus.register("tabs", Tabs);
-      window.Stimulus.register("popover", Popover);
+      window.Stimulus.register("datetime", DateTime);
+      // window.Stimulus.register("map", Map);
+      // window.Stimulus.register("carousel", Carousel);
+      // window.Stimulus.register("disclosure", Disclosure);
+      // window.Stimulus.register("tabs", Tabs);
+      // window.Stimulus.register("popover", Popover);
     </script>
   </body>
 </html>

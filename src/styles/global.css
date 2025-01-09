@@ -10,6 +10,15 @@
 
   --color-*: initial;
 
+  --spacing-header: 6rem;
+
+  --font-size-4xl--line-height: 1.115;
+  --font-size-5xl--line-height: 1.125;
+  --font-size-6xl--line-height: 1.25;
+  --font-size-7xl--line-height: 1.25;
+  --font-size-8xl--line-height: 1.25;
+  --font-size-9xl--line-height: 1.25;
+
   --color-neutral-contrast: white;
   --color-neutral-1: #fcfcfc;
   --color-neutral-2: #f9f9f9;
@@ -171,22 +180,25 @@
     --_breakpoint: var(--breakpoint-xl);
   }
 
-  @media (--min-w-2xl) {
+  /* @media (--min-w-2xl) {
     --_breakpoint: var(--breakpoint-2xl);
-  }
+  } */
 }
 
 @layer base {
-  body {
-    line-height: 1.5;
-
+  html {
     @media (--min-w-xl) {
       font-size: 18px;
     }
+  }
 
-    @media (--min-w-2xl) {
+  body {
+    line-height: 1.5;
+
+
+    /* @media (--min-w-2xl) {
       font-size: 20px;
-    }
+    } */
   }
 
   :target {
@@ -508,14 +520,10 @@
       padding-left: calc(1em * var(--_level, 0));
     }
   }
-
-  :where(.prose) {
-    color: var(--color-11);
+  
+  .typography {
+    color: var(--color-neutral-11);
     text-wrap: pretty;
-
-    * {
-      line-height: calc(2px + 2ex + 2px);
-    }
 
     :is(h1, h2, h3, h4, h5, h6) {
       text-wrap: balance;
@@ -539,7 +547,7 @@
     }
 
     p {
-      margin-top: 1em;
+      margin-block: 1em;
     }
 
     a {

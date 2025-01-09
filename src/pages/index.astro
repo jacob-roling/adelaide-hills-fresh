@@ -1,79 +1,20 @@
 ---
+export const prerender = true;
 import Base from "#layouts/Base.astro";
-import { sanityClient } from "sanity:client";
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
-import { PortableText } from "astro-portabletext";
+import * as homePage from '#content/home.md';
 
-// @ts-ignore
-const { title, description, content } = await sanityClient.getDocument(
-  "830f9c5d-2ec2-4378-9590-4c01a6fecc81",
-);
+const { title, description, headline } = homePage.frontmatter;
 ---
 
 <Base>
   <Fragment slot="head">
-    <script src="https://www.youtube.com/iframe_api" async is:inline></script>
     <title>{title}</title>
     <meta name="description" content={description} />
   </Fragment>
 
-  <main
-    id="main"
-    data-controller="disclosure youtube"
-    data-youtube-id-value={content[2].id}
-    class="container typography"
-    data-youtube-opts-value='{ "modestBranding": true, "related": false, "width": 1280 }'
-  >
-    <div class="pt-header grid grid-cols-1 gap-16 lg:grid-cols-2">
-      <div>
-        <h1>{content[0].heading}</h1>
-        <PortableText value={content[1].content} />
-      </div>
-      <div>
-        <div class="stack-layout relative">
-          <Image
-            class="rounded border"
-            src={`https://img.youtube.com/vi/${content[2].id}/maxresdefault.jpg`}
-            inferSize
-            alt="Adelaide Hills Fresh Introductory Video Thumbnail"
-          />
-          <button
-            data-disclosure-target="summary"
-            class="button icon primary solid stack-center z-1"
-            data-action="youtube#play"
-          >
-            <Icon name="heroicons:play-solid" aria-hidden="true" />
-            Play Video
-            <span class="expand-to-relative" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      data-disclosure-target="details"
-      class="data-[expanded]:bg-neutral-background/25 invisible fixed inset-0 z-20 hidden bg-transparent transition-all data-[expanded]:visible data-[expanded]:block data-[expanded]:backdrop-blur"
-      data-action="keydown.esc@window->disclosure#close keydown.esc@window->youtube#stop"
-    >
-      <div class="flex justify-end">
-        <button class="button icon" data-action="disclosure#close youtube#stop">
-          <Icon name="heroicons:x-mark" aria-hidden="true" />
-          <span class="sr-only"> Close Video </span>
-        </button>
-      </div>
-      <div
-        class="mx-auto aspect-video h-auto max-w-full p-8"
-        data-youtube-target="video"
-      >
-      </div>
-    </div>
+  <main id="main" class="container" data-sb-object-id="src/content/home.md">
+    <section class="pt-header pb-[4em]">
+      <h1 class="font-display font-bold text-6xl" data-sb-field-path="headline">{headline}</h1>
+    </section>
   </main>
 </Base>
-
-<script>
-  import Youtube from "#controllers/youtube";
-  document.addEventListener("stimulus:loaded", () => {
-    window.Stimulus.register("youtube", Youtube);
-  });
-</script>

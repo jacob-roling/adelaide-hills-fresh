@@ -1,12 +1,22 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import dayjs from "dayjs";
 
-type Props = HTMLAttributes<"time">;
+interface Props extends HTMLAttributes<"time"> {
+  datetime: string
+};
 
-const { datetime = dayjs().toISOString() } = Astro.props;
+const { datetime } = Astro.props;
+
+const date = new Date(datetime);
+
+const dateTimeFormatter = new Intl.DateTimeFormat('en-AU', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'Australia/Adelaide',
+});
 ---
 
 <time {...Astro.props}>
-  {dayjs(datetime).format("MMM DD, YYYY")}
+  {dateTimeFormatter.format(date)}
 </time>
