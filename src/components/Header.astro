@@ -6,11 +6,16 @@ import Logo from "#assets/logo.png";
 
 <header
   id="header"
-  class="bg-neutral-2 container border-b-neutral-6 sticky top-0 left-0 z-10 w-full border-b py-2"
+  class="bg-neutral-1 container border-b-neutral-6 sticky top-0 left-0 z-10 w-full border-b py-2 shadow-1"
   up-keep="true"
 >
   <nav aria-label="primary">
     <ul class="flex items-center">
+      <li>
+        <a class="button sr-only focus:not-sr-only" href="#main">
+          Skip to content
+        </a>
+      </li>
       <li class="grow">
         <a class="block" href="/">
           <Image
@@ -21,11 +26,12 @@ import Logo from "#assets/logo.png";
             height="200"
             quality="max"
             loading="eager"
+            aria-hidden="true"
           />
           <span class="sr-only">Home</span>
         </a>
       </li>
-      <li data-controller="disclosure">
+      <li>
         <button
           class="button icon group peer justify-center lg:hidden"
           data-disclosure-target="summary"
@@ -63,42 +69,40 @@ import Logo from "#assets/logo.png";
           </li>
           <li
             class="relative"
-            data-controller="disclosure popover"
+            data-controller="popover"
+            data-disclosure-focus-group-outlet="ul"
             data-popover-placement-value="top-start"
           >
-            <button
-              class="button group w-full"
-              data-disclosure-target="summary"
-              data-popover-target="anchor"
-            >
-              <span class="grow">Our Operation</span>
-              <Icon
-                class="transition-transform group-aria-expanded:rotate-180"
-                name="heroicons:chevron-down"
-                aria-hidden="true"
-              />
-            </button>
-            <ul
-              data-disclosure-target="details"
-              data-popover-target="popover"
-              class="lg:bg-neutral-background-subtle invisible static top-0 left-0 hidden origin-top rounded transition-[visibility,opacity,transform] data-[expanded]:visible data-[expanded]:block data-[expanded]:opacity-100 lg:absolute lg:w-max lg:scale-95 lg:border lg:p-1 lg:opacity-0 lg:data-[expanded]:scale-100"
-            >
-              <li>
-                <a class="button w-full" href="/sustainability">
-                  <span class="grow">Sustainability</span>
-                </a>
-              </li>
-              <li>
-                <a class="button w-full" href="/our-orchards">
-                  <span class="grow">Our Orchards</span>
-                </a>
-              </li>
-              <li>
-                <a class="button w-full" href="/our-facility">
-                  <span class="grow">Our Facility</span>
-                </a>
-              </li>
-            </ul>
+            <details class="group">
+              <summary class="button group w-full">
+                <span class="grow">Our Operation</span>
+                <Icon
+                  class="transition-transform group-open:rotate-180"
+                  name="heroicons:chevron-down"
+                  aria-hidden="true"
+                />
+              </summary>
+              <ul
+                data-popover-target="popover"
+                class="lg:bg-neutral-1 invisible static top-full left-0 hidden origin-top rounded-[calc(var(--radius)+var(--spacing-1))] transition-[visibility,opacity,transform] group-open:visible group-open:block group-open:opacity-100 lg:absolute lg:w-max lg:scale-95 lg:border lg:border-neutral-6 lg:p-1 lg:opacity-0 lg:group-open:scale-100"
+              >
+                <li>
+                  <a class="button w-full" href="/sustainability">
+                    <span class="grow">Sustainability</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="button w-full" href="/our-orchards">
+                    <span class="grow">Our Orchards</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="button w-full" href="/our-facility">
+                    <span class="grow">Our Facility</span>
+                  </a>
+                </li>
+              </ul>
+            </details>
           </li>
           <li>
             <a class="button w-full" href="/employment">

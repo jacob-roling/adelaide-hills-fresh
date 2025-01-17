@@ -18,7 +18,7 @@ const posts = await getCollection('posts');
     <meta name="description" content={description} />
   </Fragment>
 
-  <main id="main" class="container" data-sb-object-id="src/content/news.md">
+  <main id="main" tabindex="-1" class="container" data-sb-object-id="src/content/news.md">
     <section>
       <div class="pt-header pb-20 max-w-2xl">
         <h1 class="font-display font-bold text-5xl" data-sb-field-path="headline">{headline}</h1>
@@ -42,7 +42,7 @@ const posts = await getCollection('posts');
                     <span class="absolute -inset-6 rounded" aria-hidden="true" />
                   </a>
                 </h2>
-                <p class="mt-2 text-neutral-11">{description}</p>
+                <p class="mt-2 text-neutral-11 line-clamp-3">{description}</p>
                 <p class="flex items-center gap-1 mt-4 text-primary-11 group-hover:underline" aria-hidden="true">
                   Read article <Icon name="heroicons:chevron-right" aria-hidden="true" />
                 </p>

@@ -19,6 +19,15 @@
   --font-size-8xl--line-height: 1.25;
   --font-size-9xl--line-height: 1.25;
 
+  --shadow-1: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+
+  /* --box-shadow-2: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+  0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 0px 1px 0px rgba(0, 0, 0, 0.12);
+
+  --box-shadow-3: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+  0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 0px 1px 0px rgba(0, 0, 0, 0.12); */
+
   --color-neutral-contrast: white;
   --color-neutral-1: #fcfcfc;
   --color-neutral-2: #f9f9f9;
@@ -195,7 +204,6 @@
   body {
     line-height: 1.5;
 
-
     /* @media (--min-w-2xl) {
       font-size: 20px;
     } */
@@ -247,6 +255,8 @@
     transition-duration: 100ms;
     transition-timing-function: var(--transition-timing-function-in-out);
     outline-color: var(--color-10);
+    cursor: pointer;
+    user-select: none;
 
     &:hover {
       background-color: var(--color-4);
@@ -520,7 +530,7 @@
       padding-left: calc(1em * var(--_level, 0));
     }
   }
-  
+
   .typography {
     color: var(--color-neutral-11);
     text-wrap: pretty;

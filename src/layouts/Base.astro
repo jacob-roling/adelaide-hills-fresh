@@ -13,6 +13,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light dark" />
@@ -36,9 +37,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import DateTime from "#controllers/datetime";
       // import Map from "#controllers/map";
       // import Carousel from "#controllers/carousel";
-      // import Disclosure from "#controllers/disclosure";
-      // import Tabs from "#controllers/tabs";
-      // import Popover from "#controllers/popover";
+      import Disclosure from "#controllers/disclosure";
+      import Popover from "#controllers/popover";
+      import FocusGroup from "#controllers/focusGroup";
+      // import "#utils/flying-focus";
       // import "unpoly";
 
       // window.up.log.disable();
@@ -52,10 +54,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       window.Stimulus = Application.start();
       window.Stimulus.register("datetime", DateTime);
       // window.Stimulus.register("map", Map);
-      // window.Stimulus.register("carousel", Carousel);
-      // window.Stimulus.register("disclosure", Disclosure);
+      window.Stimulus.register("disclosure", Disclosure);
+      window.Stimulus.register("popover", Popover);
+      window.Stimulus.register("focus-group", FocusGroup);
       // window.Stimulus.register("tabs", Tabs);
-      // window.Stimulus.register("popover", Popover);
       
       // window.stackbit = window.stackbit || {};
   
