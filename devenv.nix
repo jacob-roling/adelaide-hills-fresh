@@ -7,6 +7,7 @@ in
   languages.javascript = {
     enable = true;
     pnpm.enable = true;
+    bun.enable = true;
   };
 
   languages.deno = {

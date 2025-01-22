@@ -1,0 +1,86 @@
+---
+export const prerender = true;
+import Base from "#layouts/Base.astro";
+---
+
+<Base>
+  <main class="container">
+    <hw-disclosure>
+      <button slot="button" class="button">Trigger</button>
+      <div slot="content" class="px-[1em] hidden">
+        <p>Contents</p>
+      </div>
+    </hw-disclosure>
+  </main>
+
+  <script>
+    class HeadlessWebDisclosure extends HTMLElement {
+      static observedAttributes = ["open"];
+
+      abortController: AbortController;
+      open: boolean;
+      button: HTMLElement | null;
+      content: HTMLElement | null;
+      
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.button = this.querySelector('[slot="button"]');
+        this.content = this.querySelector('[slot="content"]');
+
+        if (!this.button) {
+          console.log("Missing slot \"button\"");
+          return;
+        };
+        
+        if (!this.content) {
+          console.log("Missing slot \"content\"");
+          return;
+        };
+
+        this.abortController = new AbortController();
+
+        this.button.addEventListener('click', this.toggle.bind(this), {
+          signal: this.abortController.signal
+        });
+      }
+
+      attributeChangedCallback(name, oldValue, newValue) {
+        if (name == "open") {
+          this.updateState();
+        }
+      }
+
+      updateState() {
+        const isExpanded = this.open;
+        if (isExpanded) {
+          this.close();
+        } else {
+          this.open();
+        }
+      }
+
+      open() {
+        if (this.button && this.content) {
+          this.button.ariaExpanded = "true";
+          this.content.setAttribute("data-expanded", "true");
+        }
+      }
+
+      close() {
+        if (this.button && this.content) {
+          this.button.ariaExpanded = "false";
+          this.content.removeAttribute("data-expanded");
+        }
+      }
+
+      disconnectedCallback() {
+        this.abortController.abort("disconnected");
+      }
+    }
+
+    customElements.define("hw-disclosure", HeadlessWebDisclosure);
+  </script>
+</Base>

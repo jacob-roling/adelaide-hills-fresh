@@ -70,11 +70,10 @@ import Logo from "#assets/logo.png";
           <li
             class="relative"
             data-controller="popover"
-            data-disclosure-focus-group-outlet="ul"
             data-popover-placement-value="top-start"
           >
             <details class="group">
-              <summary class="button group w-full">
+              <summary class="button group w-full" data-popover-target="anchor">
                 <span class="grow">Our Operation</span>
                 <Icon
                   class="transition-transform group-open:rotate-180"
