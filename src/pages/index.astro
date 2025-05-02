@@ -3,7 +3,7 @@ export const prerender = true;
 import Base from "#layouts/Base.astro";
 import * as homePage from "#content/home.md";
 
-const { title, description, headline } = homePage.frontmatter;
+const { title, description } = homePage.frontmatter;
 ---
 
 <Base>
@@ -12,11 +12,45 @@ const { title, description, headline } = homePage.frontmatter;
     <meta name="description" content={description} />
   </Fragment>
 
-  <main id="main" class="container" data-sb-object-id="src/content/home.md">
-    <section class="pt-header pb-[4em]">
-      <h1 class="font-display text-6xl font-bold" data-sb-field-path="headline">
-        {headline}
-      </h1>
+  <main id="main" class="" data-sb-object-id="src/content/home.md">
+    <section class="section">
+      <div
+        style="grid-column: 1 / 4; display: grid; grid-template-columns: subgrid; padding-block: var(--spacing-section);"
+      >
+        <div style="grid-column: 2 / 4;">
+          <h1 class="font-display text-6xl font-bold">Adelaide Hills Fresh</h1>
+          <p class="text-xl">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+            alias officia itaque asperiores magni laudantium quo corrupti
+            incidunt dignissimos, rerum quam iusto repellendus, ad reiciendis
+            maiores inventore. Fuga, itaque culpa!
+          </p>
+        </div>
+      </div>
     </section>
   </main>
+
+  <style is:global>
+    :root {
+      --spacing-section: 8em;
+      --content-max-width: 1000px;
+      --content-padding: 2rem;
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns:
+        [left-start]
+        minmax(var(--content-padding), 1fr)
+        [content-start] minmax(0, calc(var(--content-max-width) / 2))
+        [left-end right-start] minmax(0, calc(var(--content-max-width) / 2))
+        [content-end] minmax(var(--content-padding), 1fr) [right-end];
+    }
+
+    /* .section-content {
+      display: grid;
+      grid-column: content;
+      grid-template-columns: subgrid;
+    } */
+  </style>
 </Base>

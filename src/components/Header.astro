@@ -6,7 +6,7 @@ import Logo from "#assets/logo.png";
 
 <header
   id="header"
-  class="bg-neutral-1 container border-b-neutral-6 sticky top-0 left-0 z-10 w-full border-b py-2 shadow-1"
+  class="bg-neutral-1 container sticky top-0 left-0 z-10 w-full py-2"
   up-keep="true"
 >
   <nav aria-label="primary">
@@ -32,88 +32,95 @@ import Logo from "#assets/logo.png";
         </a>
       </li>
       <li>
-        <button
-          class="button icon group peer justify-center lg:hidden"
-          data-disclosure-target="summary"
-        >
-          <Icon
-            class="text-2xl group-aria-expanded:hidden"
-            name="heroicons:bars-3"
-            aria-hidden="true"
-          />
-          <Icon
-            class="hidden text-2xl group-aria-expanded:block"
-            name="heroicons:x-mark"
-            aria-hidden="true"
-          />
-          <span class="sr-only">Mobile Menu</span>
-        </button>
-        <ul
-          class="bg-neutral-background-subtle absolute top-full left-0 hidden h-screen w-full items-center border-t py-1 px-4 data-[expanded]:block lg:static lg:flex lg:h-max lg:border-0 lg:bg-transparent lg:py-0 lg:px-0 [&>li>.button]:justify-center [&>li>.button]:px-[1em]"
-          data-disclosure-target="details"
-        >
-          <li>
-            <a class="button w-full" href="/about-us">
-              <span class="grow">About Us</span>
-            </a>
-          </li>
-          <li>
-            <a class="button w-full" href="/our-apples"
-              ><span class="grow">Our Apples</span></a
-            >
-          </li>
-          <li>
-            <a class="button w-full" href="/fruit-australia"
-              ><span class="grow">Fruit Australia</span></a
-            >
-          </li>
-          <li
-            class="relative"
-            data-controller="popover"
-            data-popover-placement-value="top-start"
+        <details open>
+          <summary class="button icon group peer justify-center lg:hidden">
+            <Icon
+              class="text-2xl group-aria-expanded:hidden"
+              name="heroicons:bars-3"
+              aria-hidden="true"
+            />
+            <Icon
+              class="hidden text-2xl group-aria-expanded:block"
+              name="heroicons:x-mark"
+              aria-hidden="true"
+            />
+            <span class="sr-only">Mobile Menu</span>
+          </summary>
+          <ul
+            class="bg-neutral-background-subtle absolute top-full left-0 hidden h-screen w-full items-center border-t py-1 px-4 data-[expanded]:block lg:static lg:flex lg:h-max lg:border-0 lg:bg-transparent lg:py-0 lg:px-0 [&>li>.button]:justify-center [&>li>.button]:px-[1em]"
           >
-            <details class="group">
-              <summary class="button group w-full" data-popover-target="anchor">
-                <span class="grow">Our Operation</span>
-                <Icon
-                  class="transition-transform group-open:rotate-180"
-                  name="heroicons:chevron-down"
-                  aria-hidden="true"
-                />
-              </summary>
-              <ul
-                data-popover-target="popover"
-                class="lg:bg-neutral-1 invisible static top-full left-0 hidden origin-top rounded-[calc(var(--radius)+var(--spacing-1))] transition-[visibility,opacity,transform] group-open:visible group-open:block group-open:opacity-100 lg:absolute lg:w-max lg:scale-95 lg:border lg:border-neutral-6 lg:p-1 lg:opacity-0 lg:group-open:scale-100"
+            <li>
+              <a class="button w-full" href="/">
+                <span class="grow">Home</span>
+              </a>
+            </li>
+            <li>
+              <a class="button w-full" href="/about-us">
+                <span class="grow">About Us</span>
+              </a>
+              <!-- </li>
+            <li>
+              <a class="button w-full" href="/our-apples"
+                ><span class="grow">Our Apples</span></a
               >
-                <li>
-                  <a class="button w-full" href="/sustainability">
-                    <span class="grow">Sustainability</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="button w-full" href="/our-orchards">
-                    <span class="grow">Our Orchards</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="button w-full" href="/our-facility">
-                    <span class="grow">Our Facility</span>
-                  </a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a class="button w-full" href="/employment">
-              <span class="grow"> Employment </span>
-            </a>
-          </li>
-          <li>
-            <a class="button w-full" href="/news">
-              <span class="grow">News</span>
-            </a>
-          </li>
-        </ul>
+            </li>
+            <li>
+              <a class="button w-full" href="/fruit-australia"
+                ><span class="grow">Fruit Australia</span></a
+              >
+            </li> -->
+              <!-- <li
+              class="relative"
+              data-controller="popover"
+              data-popover-placement-value="top-start"
+            >
+              <details class="group">
+                <summary
+                  class="button group w-full"
+                  data-popover-target="anchor"
+                >
+                  <span class="grow">Our Operation</span>
+                  <Icon
+                    class="transition-transform group-open:rotate-180"
+                    name="heroicons:chevron-down"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <ul
+                  data-popover-target="popover"
+                  class="lg:bg-neutral-1 lg:border-neutral-6 invisible static top-full left-0 hidden origin-top rounded-[calc(var(--radius)+var(--spacing-1))] transition-[visibility,opacity,transform] group-open:visible group-open:block group-open:opacity-100 lg:absolute lg:w-max lg:scale-95 lg:border lg:p-1 lg:opacity-0 lg:group-open:scale-100"
+                >
+                  <li>
+                    <a class="button w-full" href="/sustainability">
+                      <span class="grow">Sustainability</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="button w-full" href="/our-orchards">
+                      <span class="grow">Our Orchards</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="button w-full" href="/our-facility">
+                      <span class="grow">Our Facility</span>
+                    </a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a class="button w-full" href="/employment">
+                <span class="grow"> Employment </span>
+              </a>
+            </li>
+            <li>
+              <a class="button w-full" href="/news">
+                <span class="grow">News</span>
+              </a>
+            </li> -->
+            </li>
+          </ul>
+        </details>
       </li>
     </ul>
   </nav>
