@@ -1,0 +1,12 @@
+---
+import { Image } from "astro:assets";
+import path from "node:path";
+
+const { file, image } = Astro.props;
+
+const absImg = path.resolve(path.dirname(file), image.src);
+const relImg = path.relative(import.meta.dirname, absImg);
+const imageFile = import(/* @vite-ignore */ relImg);
+---
+
+<Image src={imageFile} alt={image.alt} {...Astro.props} />

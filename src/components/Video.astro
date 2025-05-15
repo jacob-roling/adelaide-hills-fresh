@@ -1,0 +1,30 @@
+---
+const { title, provider, id } = Astro.props;
+---
+
+{
+  () => {
+    switch (provider) {
+      case "youtube":
+        return (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${id}`}
+            title="Embed videos and playlists"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            {...Astro.props}
+          />
+        );
+      case "mux":
+        return (
+          <mux-player
+            playback-id={id}
+            metadata-video-title={title}
+            accent-color="#dc3e42"
+            {...Astro.props}
+          />
+        );
+    }
+  }
+}

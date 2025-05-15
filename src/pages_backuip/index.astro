@@ -1,0 +1,42 @@
+---
+export const prerender = true;
+import Base from "#layouts/Base.astro";
+// import * as homePage from "#content/home.md";
+import testVideo from "#assets/uploads/flower.webm";
+
+// const { title, description } = homePage.frontmatter;
+---
+
+<Base>
+  <Fragment slot="head">
+    <!-- <title>{title}</title>
+    <meta name="description" content={description} /> -->
+  </Fragment>
+
+  <main id="main" class="" data-sb-object-id="src/content/home.md">
+    <section class="section">
+      <div
+        style="grid-column: width-start / content-end; display: grid; grid-template-columns: subgrid; padding-block: var(--spacing-section);"
+      >
+        <div style="grid-column: content;">
+          <div class="typography">
+            <h1>Adelaide Hills Fresh</h1>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+              alias officia itaque asperiores magni laudantium quo corrupti
+              incidunt dignissimos, rerum quam iusto repellendus, ad reiciendis
+              maiores inventore. Fuga, itaque culpa!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div style="grid-column: content">
+        <video class="aspect-video w-full" controls>
+          <source src={testVideo} type="video/webm" />
+        </video>
+      </div>
+    </section>
+  </main>
+</Base>

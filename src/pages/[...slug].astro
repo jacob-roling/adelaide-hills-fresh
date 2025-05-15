@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from "astro";
+import Page from "#layouts/Page.astro";
+import ComponentMap from "#components/ComponentMap.astro";
+
+export const prerender = true;
+
+export const getStaticPaths = (() => {
+  const pages = Object.values(
+    import.meta.glob("../../content/*.md", { eager: true }),
+  );
+
+  return pages.map((page: any) => {
+    return {
+      params: {
+        slug: page.frontmatter.slug,
+      },
+      props: { ...page.frontmatter, file: page.file },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { file, title, description, children } = Astro.props;
+---
+
+<Page>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </Fragment>
+
+  <main id="main">
+    <ComponentMap {file} {children} />
+  </main>
+</Page>

@@ -3,7 +3,81 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 ---
 
-<footer class="bg-neutral-background-subtle container typography border-t pt-8">
+<section class="section -mb-8 pt-16">
+  <div
+    class="bg-neutral-2 flex overflow-hidden rounded-xl"
+    style="grid-column: content;"
+  >
+    <div class="typography grow p-8 pr-16">
+      <h2 class="subheading">Come and Say Hello</h2>
+      <p>You can find us at 202 Onkaparinga Valley Rd, Woodside SA 5244.</p>
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.824089568242!2d138.88166107730004!3d-34.93594847283697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ab747d90b29288d%3A0xdc2f9906bf48da0a!2s202%20Onkaparinga%20Valley%20Rd%2C%20Woodside%20SA%205244!5e0!3m2!1sen!2sau!4v1746689914946!5m2!1sen!2sau"
+      width="800"
+      height="400"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<footer class="section pb-content bg-neutral-3 pt-32">
+  <div style="grid-column: content;">
+    <div class="grid grid-cols-4 gap-8 pb-6">
+      <div>
+        <Image
+          class="mb-4 h-[100px] w-auto"
+          src="/logo.png"
+          alt="Adelaide Hills Fresh Logo"
+          width="128"
+          height="128"
+        />
+        <p class="text-neutral-11 text-[.875rem]">
+          Adelaide Hills Fresh packages, markets and distributes proprietary,
+          conventional, and organic apples throughout Australia and
+          internationally.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-semibold">Company</h2>
+        <ul class="[&>li>a]:inline-flex [&>li>a]:py-1 [&>li>a]:hover:underline">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about-us">About Us</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- <h2 class="font-semibold">Contact</h2>
+        <ul class="[&>li>a]:inline-flex [&>li>a]:py-1 [&>li>a]:hover:underline">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about-us">About Us</a>
+          </li>
+        </ul> -->
+      </div>
+    </div>
+    <hr class="border-neutral-6 my-6" />
+    <div class="text-neutral-11 flex items-center justify-between">
+      <!-- <div>
+        Copyright © {new Date().getFullYear()} Adelaide Hills Fresh, All Rights
+        Reserved.
+      </div> -->
+      <div>
+        Copyright © {new Date().getFullYear()} Adelaide Hills Fresh, All Rights
+        Reserved. ABN: 81622998761.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- <footer class="bg-neutral-background-subtle container typography border-t pt-8">
   <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 [&_.button]:justify-start">
     <div class="col-span-2 lg:col-span-1">
       <Image
@@ -83,4 +157,4 @@ import { Image } from "astro:assets";
       >
     </p>
   </div>
-</footer>
+</footer> -->

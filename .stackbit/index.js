@@ -1,12 +1,36 @@
-import OurApplesPage from "./models/OurApplesPage";
-import HomePage from "./models/HomePage";
-import NewsPage from "./models/NewsPage";
-import AboutUsPage from "./models/AboutUsPage";
-import EmploymentPage from "./models/EmploymentPage";
-import SustainabilityPage from "./models/SustainabilityPage";
-import OurFacilityPage from "./models/OurFacilityPage";
-import OurOrchardsPage from "./models/OurOrchardsPage";
-import FruitAustraliaPage from "./models/FruitAustraliaPage";
-import Post from "./models/Post";
+import page from "./models/page";
+import section from "./models/section";
+import site_configuration from "./models/site_configuration";
+import column from "./models/column";
+import section_area from "./models/section_area";
+import row from "./models/row";
+import content from "./models/content";
+import button from "./models/button";
+import text from "./models/text";
+import card from "./models/card";
+import image from "./models/image";
+import grid from "./models/grid";
+import icon from "./models/icon";
+import process from "./models/process";
+import contact_form from "./models/contact_form";
+import service_area_map from "./models/service_area_map";
 
-export const models = [HomePage, NewsPage, OurApplesPage, AboutUsPage, EmploymentPage, SustainabilityPage, OurFacilityPage, OurOrchardsPage, FruitAustraliaPage, Post];
+export const models = [
+  page,
+  section,
+  text,
+  icon,
+  button,
+  // site_configuration,
+  // section_area,
+  // row,
+  // content,
+  // button,
+  // text,
+  // card,
+  // image,
+  // grid,
+  // process,
+  // contact_form,
+  // service_area_map,
+];

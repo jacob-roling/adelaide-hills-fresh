@@ -15,7 +15,7 @@
     "@floating-ui/dom": "^1.6.13",
     "@glidejs/glide": "^3.7.1",
     "@hotwired/stimulus": "^3.2.2",
-    "@iconify-json/heroicons": "^1.2.2",
+    "@mux/mux-player": "^3.4.0",
     "@radix-ui/colors": "^3.0.0",
     "@stackbit/cms-git": "^1.0.32",
     "astro": "^5.1.8",
@@ -31,6 +31,8 @@
     "unpoly": "^3.9.5"
   },
   "devDependencies": {
+    "@iconify-json/heroicons": "^1.2.2",
+    "@iconify-json/lucide": "^1.2.41",
     "@stackbit/cli": "^0.3.129",
     "@stackbit/types": "^2.1.12",
     "@tailwindcss/vite": "4.0.0-alpha.28",
@@ -41,8 +43,13 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "sanity": "^3.86.1",
     "tailwindcss": "4.0.0-alpha.28",
+    "unified": "^11.0.5",
     "vite": "^6.0.7"
   }
 }

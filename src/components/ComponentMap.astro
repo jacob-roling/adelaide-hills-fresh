@@ -1,0 +1,13 @@
+---
+import Section from "#components/Section.astro";
+
+const componentMap = new Map([["section", Section]]);
+const { file, children } = Astro.props;
+---
+
+{
+  children.map((child, index) => {
+    const Component: any = componentMap.get(child.type);
+    return <Component {index} {file} {...child} />;
+  })
+}

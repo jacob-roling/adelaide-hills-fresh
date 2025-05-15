@@ -4,6 +4,8 @@ let
   pkgs-unstable-small = import inputs.nixpkgs-unstable-small { system = pkgs.stdenv.system; };
 in
 {
+  dotenv.enable = false;
+  
   languages.javascript = {
     enable = true;
     pnpm.enable = true;

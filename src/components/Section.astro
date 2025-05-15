@@ -1,0 +1,100 @@
+---
+import { parseString } from "#utils/markdown";
+import DynamicImage from "#components/DynamicImage.astro";
+import Button from "#components/Button.astro";
+import Video from "#components/Video.astro";
+
+const {
+  index,
+  file,
+  layout,
+  heading,
+  subheading,
+  eyebrow,
+  content,
+  image,
+  video,
+  buttons = [],
+} = Astro.props;
+
+const Heading = index == 0 ? "h1" : "h2";
+---
+
+{
+  layout == "centered" ? (
+    <section class="section">
+      <div class="py-16" style="grid-column: content;">
+        <div class="max-w-prose-lg mx-auto">
+          <div class="typography">
+            {subheading || eyebrow ? (
+              <hgroup class="text-center">
+                {eyebrow ? <p class="eyebrow">{eyebrow}</p> : null}
+                <Heading class="heading">{heading}</Heading>
+                {subheading ? <p class="subheading">{subheading}</p> : null}
+              </hgroup>
+            ) : (
+              <Heading class="heading text-center">{heading}</Heading>
+            )}
+            <Fragment set:html={parseString(content)} />
+          </div>
+          {buttons.length > 0 ? (
+            <div class="mt-8 flex flex-wrap justify-center">
+              {buttons.map((button) => (
+                <Button {...button} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+        {image ? (
+          <DynamicImage
+            class="mt-8 aspect-video h-auto w-full object-cover object-center"
+            {file}
+            {image}
+            height="800"
+          />
+        ) : null}
+        {video ? (
+          <Video class="mt-8 aspect-video h-auto w-full" {...video} />
+        ) : null}
+      </div>
+    </section>
+  ) : (
+    <section class="section">
+      <div class="flex justify-between py-16" style="grid-column: content;">
+        <div
+          class="grow"
+          class:list={{
+            "pr-32": layout == "first",
+            "order-last pl-32": layout == "last",
+          }}
+        >
+          <div class="typography max-w-prose">
+            {subheading || eyebrow ? (
+              <hgroup>
+                {eyebrow ? <p class="eyebrow">{eyebrow}</p> : null}
+                <Heading class="heading">{heading}</Heading>
+                {subheading ? <p class="subheading">{subheading}</p> : null}
+              </hgroup>
+            ) : (
+              <Heading class="heading">{heading}</Heading>
+            )}
+            <Fragment set:html={parseString(content)} />
+          </div>
+          {buttons.length > 0 ? (
+            <div class="mt-8 flex flex-wrap">
+              {buttons.map((button) => (
+                <Button {...button} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+        {image ? (
+          <DynamicImage class="h-[400px]" {file} {image} height="400" />
+        ) : null}
+        {video ? (
+          <Video class="aspect-video h-[400px] w-auto" {...video} />
+        ) : null}
+      </div>
+    </section>
+  )
+}

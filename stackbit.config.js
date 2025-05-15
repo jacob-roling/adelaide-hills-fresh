@@ -9,12 +9,12 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ["src/content"],
+      contentDirs: ["content"],
       models,
       assetsConfig: {
         referenceType: "relative",
-        assetsDir: "src/assets",
-        uploadDir: "uploads"
+        assetsDir: "content/assets",
+        uploadDir: "uploads",
       },
     }),
   ],

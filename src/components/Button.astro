@@ -1,0 +1,22 @@
+---
+import { Icon } from "astro-icon/components";
+import root from "#/root";
+import { resolve } from "node:path";
+
+const { variant, link, text, icon } = Astro.props;
+
+let page;
+
+if (link) {
+  page = await import(/* @vite-ignore */ resolve(root, link));
+}
+---
+
+{
+  link ? (
+    <a href={page.frontmatter.slug} class={`button ${variant}`}>
+      {text}
+      {icon ? <Icon name={icon} aria-hidden="true" /> : null}
+    </a>
+  ) : null
+}

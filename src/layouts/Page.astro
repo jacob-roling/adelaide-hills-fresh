@@ -1,5 +1,5 @@
 ---
-// import "#styles/global.css";
+import "#styles/new.css";
 import Header from "#components/Header.astro";
 import Footer from "#components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
@@ -32,6 +32,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <slot />
 
+    <Footer />
+
     <script>
       import { Application } from "@hotwired/stimulus";
       import DateTime from "#controllers/datetime";
@@ -40,6 +42,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import Disclosure from "#controllers/disclosure";
       import Popover from "#controllers/popover";
       import FocusGroup from "#controllers/focusGroup";
+      import "@mux/mux-player";
       // import "#utils/flying-focus";
       // import "unpoly";
 
@@ -74,9 +77,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       //   window.addEventListener("stackbitInitialized", handler);
       // }
     </script>
-
-    <style is:global>
-      @import "tailwindcss";
-    </style>
   </body>
 </html>
